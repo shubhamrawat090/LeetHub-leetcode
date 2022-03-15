@@ -8,6 +8,7 @@ class Solution {
                 //if both i and j are are pointing to same interval skip it
                 if(i==j) continue;
                 
+                //count the no. of covered intervals
                 if(intervals[i][0]>=intervals[j][0] && intervals[i][1]<=intervals[j][1]){
                     countOfCovered++;
                     break;//no need to check ahead
@@ -15,6 +16,7 @@ class Solution {
             }
         }
         
+        //remaining intervals = total Intervals - covered intervals
         return size-countOfCovered;
     }
 }
