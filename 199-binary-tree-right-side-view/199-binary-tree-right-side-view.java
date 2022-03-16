@@ -32,21 +32,19 @@ class Solution {
             
             //list for nodes of current level
             List<Integer> levels = new ArrayList<>();
-            TreeNode curr = null;
+            
+            ans.add(q.peek().val);
             while(count-- > 0){
                 //remove front node of queue as it contains first node of that level from left -> right
-                curr = q.remove();
+                TreeNode curr = q.remove();
                 //add that value to levels list
                 levels.add(curr.val);
                 
-                //get the left child of current tree if it exists
-                if(curr.left!=null) q.add(curr.left);
                 //get the right child of current tree if it exists
                 if(curr.right!=null) q.add(curr.right);
+                //get the left child of current tree if it exists
+                if(curr.left!=null) q.add(curr.left);
             }
-            
-            //add that level to our ans
-            ans.add(curr.val);
         }
         
         return ans;
