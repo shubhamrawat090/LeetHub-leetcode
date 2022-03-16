@@ -15,22 +15,9 @@
  */
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
-        // Your code here
-          List<List<Integer>> levels = levelOrder(root);
-          List<Integer> ans = new ArrayList<>();
-
-          for(List<Integer> level: levels){
-              ans.add(level.get(level.size()-1));
-          }
-
-          return ans;
-    }
-    
-    public List<List<Integer>> levelOrder(TreeNode root) {
         if(root == null) return new ArrayList<>();
         
-        //list containing all nodes levelwise
-        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> ans = new ArrayList<>();
         
         //queue for processing
         Queue<TreeNode> q = new ArrayDeque<>();
@@ -45,10 +32,10 @@ class Solution {
             
             //list for nodes of current level
             List<Integer> levels = new ArrayList<>();
-            
+            TreeNode curr = null;
             while(count-- > 0){
                 //remove front node of queue as it contains first node of that level from left -> right
-                TreeNode curr = q.remove();
+                curr = q.remove();
                 //add that value to levels list
                 levels.add(curr.val);
                 
@@ -59,7 +46,7 @@ class Solution {
             }
             
             //add that level to our ans
-            ans.add(levels);
+            ans.add(curr.val);
         }
         
         return ans;
