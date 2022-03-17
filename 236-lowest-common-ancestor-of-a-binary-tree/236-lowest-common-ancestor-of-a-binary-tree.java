@@ -26,7 +26,7 @@ class Solution {
         if(leftAns!=null && rightAns!=null){
             //if left and right have p & q in them then root is LCA
             return root;
-        }else if(leftAns!=null && rightAns==null){
+        }else if(rightAns==null){
             //p & q both are present in left tree, then left child is the LCA
             return leftAns;
         }
