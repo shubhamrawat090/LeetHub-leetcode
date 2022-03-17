@@ -14,46 +14,25 @@
  * }
  */
 class Solution {
-    class Pair{
-        int height;
-        boolean balanced;
-        
-        Pair(){
-            this.height = 0;
-            this.balanced = false;
-        }
-        Pair(int height, boolean balanced){
-            this.height = height;
-            this.balanced = balanced;
-        }
-    }
-    
     public boolean isBalanced(TreeNode root) {
-        return heightBalancedChecker(root).balanced;
+        if (root == null){
+            return true;
+        }
+        return getHeight(root) != -1;
     }
     
-    Pair heightBalancedChecker(TreeNode node){
-        if(node == null)
-            return new Pair(0, true);
-        
-        Pair leftPair = heightBalancedChecker(node.left);
-        if(!leftPair.balanced){
-            return leftPair;
+    private int getHeight(TreeNode root){
+        if (root == null){
+            return 0;
         }
-        Pair rightPair = heightBalancedChecker(node.right);
-        if(!rightPair.balanced){
-            return rightPair;
+        int leftHeight = getHeight(root.left);
+        int rightHeight = getHeight(root.right);
+        if (leftHeight == -1 || rightHeight == -1){
+            return -1;
         }
-        
-        int htDiff = Math.abs(leftPair.height - rightPair.height);
-        Pair ans = new Pair();
-        ans.height = 1 + Math.max(leftPair.height, rightPair.height);
-        if(htDiff<=1){
-            ans.balanced = true;
-        }else{
-            ans.balanced = false;
+        if (Math.abs(leftHeight-rightHeight) > 1){
+            return -1;
         }
-        
-        return ans;
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 }
