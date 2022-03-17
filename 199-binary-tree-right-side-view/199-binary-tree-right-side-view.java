@@ -33,6 +33,7 @@ class Solution {
             //list for nodes of current level
             List<Integer> levels = new ArrayList<>();
             
+            //bfs is from right to left so first value in queue is the rightmost node of that level
             ans.add(q.peek().val);
             while(count-- > 0){
                 //remove front node of queue as it contains first node of that level from left -> right
