@@ -5,8 +5,9 @@ class Solution {
         for (int i = 0; i < nums.length; i++) {
             // if target-curr val exists in map
             // then return the index for map element, curr element
-            if (valIdxMap.containsKey(target - nums[i])) {
-                return new int[] { valIdxMap.get(target - nums[i]), i };
+            int valToBeChecked = target - nums[i];
+            if (valIdxMap.containsKey(valToBeChecked)) {
+                return new int[] { valIdxMap.get(valToBeChecked), i };
             }
 
             valIdxMap.put(nums[i], i);
