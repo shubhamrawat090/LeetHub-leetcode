@@ -1,18 +1,18 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        HashMap<Integer, Integer> valIdxMap = new HashMap<>();
-
-        for (int i = 0; i < nums.length; i++) {
-            // if target-curr val exists in map
-            // then return the index for map element, curr element
-            int valToBeChecked = target - nums[i];
-            if (valIdxMap.containsKey(valToBeChecked)) {
-                return new int[] { valIdxMap.get(valToBeChecked), i };
+        int forwardCounter =1;
+        while(forwardCounter < nums.length)
+        {
+            for(int i=0 ; (i + forwardCounter) < nums.length; i++)
+            {
+                if((nums[i] + nums[(i+forwardCounter)]) == target)
+                    return new int[]{i,(i+forwardCounter)};
             }
-
-            valIdxMap.put(nums[i], i);
+            forwardCounter++;
         }
-
-        return new int[] { -1, -1 };
+      return null;  
+        
+        
+    
     }
 }
