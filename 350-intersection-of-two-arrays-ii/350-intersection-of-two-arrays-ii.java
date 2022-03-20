@@ -1,27 +1,41 @@
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
-        //frequency array for nums1
-        //size if 1001 because the range of nums1 or nums2 is from [0, 1000]
-        int[] arr = new int[1001];
-        for (int i = 0; i < nums1.length; i++) {
-            arr[nums1[i]]++;
-        }
-        //stores answer
-        ArrayList<Integer> al = new ArrayList<Integer>();
+        //List for containing answer
+        List<Integer> list = new ArrayList<>();
         
-        /*traverse through nums2 and check in frequency array of nums1 that if the values of nums2 are present in it, if that is the case then add that value in our ans list and subtract 1 from frequency as this value is processed 1 time*/
-        for (int i = 0; i < nums2.length; i++) {
-            if (arr[nums2[i]] > 0) {
-                arr[nums2[i]]--;
-                al.add(nums2[i]);
+        //sort both arrays
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        
+        //pointers for nums1 and nums2
+        int i = 0, j = 0;
+        
+        //iterating both nums1 and nums2 simultaneously till any one of them is finished
+        while (i < nums1.length && j < nums2.length) {
+            //if the values match in both arr then it is a part of intersection
+            if (nums1[i] == nums2[j]) {
+                //add that value in intersection list
+                list.add(nums1[i]);
+                //increment both pointers
+                i++; j++;
+            } 
+            //if val of nums1 < val of nums2, val of nums1 will never occur in nums2 as both arr are sorted, so move nums1 ptr 1 step ahead
+            else if (nums1[i] < nums2[j]) {
+                i++;
+            }
+            //if val of nums2 < val of nums1, val of nums2 will never occur in nums1 as both arr are sorted, so move nums2 ptr 2 step ahead
+            else {
+                j++;
             }
         }
-        //converting array list to array(we can use a new array as well I have used the frequency array reference variable only as the need for it was finished so this variable can be reused)
-        arr = new int[al.size()];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = al.get(i);
+        
+        //converting list to array
+        int[] res = new int[list.size()];
+    
+        for (int x = 0; x < list.size(); ++x) {
+            res[x] = list.get(x);
         }
         //return final ans
-        return arr;
+        return res;
     }
 }
