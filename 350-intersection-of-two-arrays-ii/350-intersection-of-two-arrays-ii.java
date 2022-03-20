@@ -23,21 +23,25 @@ class Solution {
             }
         }
         
+        //traverse keys of map1 and check if they are present in map2
         for(int key: map1.keySet()){
+            //if a key of map1 is present in map2 then the intersection is minimum of both their frequencies
             if(map2.containsKey(key)){
                 int minFreq = Math.min(map1.get(key), map2.get(key));
-                
+                //in ans list add key minFreq no. of times
                 while(minFreq-->0){
                     ans.add(key);
                 }
             }
         }
         
+        //convert list to array
         int[] finalAns = new int[ans.size()];
         for(int i=0; i<ans.size(); i++){
             finalAns[i] = ans.get(i);
         }
         
+        //return final array
         return finalAns;
     }
 }
