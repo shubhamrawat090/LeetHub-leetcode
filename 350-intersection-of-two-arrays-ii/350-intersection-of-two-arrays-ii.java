@@ -1,6 +1,7 @@
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
         //frequency array for nums1
+        //size if 1001 because the range of nums1 or nums2 is from [0, 1000]
         int[] arr = new int[1001];
         for (int i = 0; i < nums1.length; i++) {
             arr[nums1[i]]++;
