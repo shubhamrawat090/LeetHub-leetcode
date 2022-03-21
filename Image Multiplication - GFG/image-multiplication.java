@@ -111,14 +111,17 @@ class Node{
 }
  */
  class Solution {
-    long ans = 0;
-    long MODULO = 1000000007;
+    //travel and change strategy
+    long ans = 0; // stores our final ans
+    long MODULO = 1000000007; // to keep values inside range
     
     private void mult(Node r1, Node r2){
+        //if any node is null then we won't have corresponding image for the other one so don't multiply it
         if(r1==null || r2==null){
             return;
         }
         
+        //multiply values from left of left subtree -> right of right subtree and vice versa
         ans += (r1.data * r2.data)%MODULO;
         mult(r1.left, r2.right);
         mult(r1.right, r2.left);
@@ -126,8 +129,10 @@ class Node{
     
     public long imgMultiply(Node root)
     {
+        //multiply ans 2 times
         ans = (root.data*root.data)%MODULO;
+        //send left and right subtree for multiplication
         mult(root.left, root.right);
-        return ans%MODULO;
+        return ans%MODULO;//keep ans in range
     }
 }
