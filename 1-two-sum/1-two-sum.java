@@ -11,8 +11,5 @@ class Solution {
             forwardCounter++;
         }
       return null;  
-        
-        
-    
     }
 }
