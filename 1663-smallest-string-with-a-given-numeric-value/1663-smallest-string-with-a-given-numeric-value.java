@@ -12,7 +12,7 @@ class Solution {
         int value = k%25;// remaining value is neither 'a' nor 'z'
         
         char[] c = new char[n];
-        // Arrays.fill(c, 'a');
+        Arrays.fill(c, 'a');
         int i=n-1; //iterating from end
         
         //filling z's from end
@@ -26,9 +26,9 @@ class Solution {
         }
         
         //fill remaining with 'a', this can be AVOIDED BY USING Arrays.fill(c, 'a');
-        while(i>=0){
-            c[i--] = 'a';
-        }
+        // while(i>=0){
+        //     c[i--] = 'a';
+        // }
         
         return new String(c);
     }
