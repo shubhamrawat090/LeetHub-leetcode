@@ -18,25 +18,7 @@ class Solution {
         if(root == null){
             return 0;
         }
-        Queue<TreeNode> q = new LinkedList<>();
         
-        q.add(root);
-        int depth = 0;
-        while(q.size()!=0){
-            int count = q.size();
-            depth++;
-            while(count-->0){
-                TreeNode curr = q.remove();
-                //Add left and right child if they exist
-                if(curr.left!=null){
-                    q.add(curr.left);
-                }
-                if(curr.right!=null){
-                    q.add(curr.right);
-                }
-            }
-        }
-        
-        return depth;
+        return 1+Math.max(maxDepth(root.left), maxDepth(root.right));
     }
 }
