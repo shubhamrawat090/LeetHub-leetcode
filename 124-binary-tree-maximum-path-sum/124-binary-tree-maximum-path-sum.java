@@ -40,9 +40,13 @@ class Solution {
         return Math.max(root.val, Math.max(rightWithRoot, leftWithRoot));
     }
     
+    //this is the driver function
     public int maxPathSum(TreeNode root) {
+        //initially path value is set to -infinity as path can be negative
         maxPathSum = Integer.MIN_VALUE;
+        //pass our tree to helper function
         pathSum(root);
+        //return the maxPathSum calculated by the helper function
         return maxPathSum;
     }
 }
