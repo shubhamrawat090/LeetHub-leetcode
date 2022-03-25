@@ -1,6 +1,6 @@
 class Solution {
     public int twoCitySchedCost(int[][] costs) {
-        int N = costs.length * 1/2;
+        int N = costs.length/2;
         int minCost = 0;
         int idx = 0;
         int[] refund = new int[2*N];
