@@ -1,16 +1,15 @@
 class Solution {
     public int[] kWeakestRows(int[][] mat, int k) {
         int[] soldierNum = new int[mat.length];
-        int ctr = 0;
-        for(int[] arr: mat){
+        
+        for(int i=0; i<mat.length; i++){
             int soldiers=0;
-            for(int i=0; i<arr.length; i++){
-                if(arr[i]==1) soldiers++;
+            for(int j=0; j<mat[0].length; j++){
+                if(mat[i][j]==1) soldiers++;
                 else break;
             }
             //we have added i because in case of same no. of soldiers the lower value of i will be considered weaker
-            soldierNum[ctr] = soldiers*100 + ctr;
-            ctr++;
+            soldierNum[i] = soldiers*100 + i;
         }
         
         Arrays.sort(soldierNum);//sort to get weakest -> strongest soldiers
