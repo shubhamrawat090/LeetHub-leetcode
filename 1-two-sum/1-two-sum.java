@@ -1,5 +1,6 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
+        // O(N*N) time O(1) space
         int forwardCounter =1;
         while(forwardCounter < nums.length)
         {
