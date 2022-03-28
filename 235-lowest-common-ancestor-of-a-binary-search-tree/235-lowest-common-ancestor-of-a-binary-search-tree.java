@@ -22,6 +22,6 @@ class Solution {
             return lowestCommonAncestor(root.left,p,q);
         // either of p or q is root which means that is the LCA
         // ROOT IS ALWAYS THE LCA
-        else return root;
+        return root;
     }
 }
