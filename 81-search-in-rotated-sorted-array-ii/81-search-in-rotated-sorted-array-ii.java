@@ -1,5 +1,6 @@
 class Solution {
     public boolean search(int[] nums, int target) {
+        //find pivot which is the point where our array is partitioned
         int pivot = findPivotWithDuplicates(nums);
 
         // if you did not find a pivot, it means the array is not rotated
@@ -10,13 +11,18 @@ class Solution {
 
         // if pivot is found, you have found 2 asc sorted arrays
         if (nums[pivot] == target) {
+            //the element at pivot is our target
             return true;
         }
 
+        //we know that pivot is not our target so we can skip it 
+        //which is why we search in the ranges [0, pivot-1], [pivot+1, nums.length-1]
         if (target >= nums[0]) {
+            //if target is less that the first element then it is not in the left sorted array as it was in ascending and our target is less than the least element itself
             return binarySearch(nums, target, 0, pivot - 1);
         }
 
+        //if we do not find our target in the left sorted arr, then search the right asc sorted arr
         return binarySearch(nums, target, pivot + 1, nums.length - 1);
         
     }
@@ -67,13 +73,15 @@ class Solution {
             // might be possible that (start + end) exceeds the range of int in java
             int mid = start + (end - start) / 2;
 
-            if (target < arr[mid]) {
-                end = mid - 1;
-            } else if (target > arr[mid]) {
-                start = mid + 1;
-            } else {
-                // ans found
+            if(arr[mid] == target){
+                //element found at mid
                 return true;
+            }else if(target < arr[mid]){
+                //target on left side
+                end = mid - 1;
+            }else{
+                //target on right side
+                start = mid + 1;
             }
         }
         return false;
