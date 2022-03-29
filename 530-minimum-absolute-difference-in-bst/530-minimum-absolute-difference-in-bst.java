@@ -14,42 +14,37 @@
  * }
  */
 class Solution {
+    //stores the answer we need
+    int minDiff = Integer.MAX_VALUE;
+    //stores previous node for inorder traversal
+    TreeNode prev = null;
+    
     public int getMinimumDifference(TreeNode root) {
         if(root == null){
             return 0;
         }
         
-        //stores the inorder of tree which is in increasing order
-        List<Integer> increasingList = new ArrayList<>();
-        //do inorder traversal and store elements in the list
-        inorder(root, increasingList);
+        inorder(root);
         
-        //get the minDiff of all diffs
-        int minDiff = Integer.MAX_VALUE;
-        //traverse the list and compare adjacent value differences with our minDiff
-        for(int i=0; i<increasingList.size()-1; i++){
-            int diff = Math.abs(increasingList.get(i) - increasingList.get(i+1));
-            minDiff = Math.min(minDiff, diff);
-        }
-        
-        //return calculated minDiff
         return minDiff;
     }
     
-    //inorder function
-    private void inorder(TreeNode root, List<Integer> list){
-        //stop when no node exist
+    private void inorder(TreeNode root){
         if(root == null){
             return;
         }
         
         //left call
-        inorder(root.left, list);
+        inorder(root.left);
         
-        //node -> add value of node in the list
-        list.add(root.val);
+        //inorder processing -> Node operation
+        if(prev!=null){
+            minDiff = Math.min(minDiff, Math.abs(prev.val - root.val));
+        }
+        
+        prev = root;
         
         //right call
-        inorder(root.right, list);
+        inorder(root.right);
     }
 }
