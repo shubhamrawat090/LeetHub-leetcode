@@ -38,6 +38,11 @@ class Solution {
         
         //remove cycle
         // root.left = null;
+        // tail.right = root;
+        // tail = tail.right;
+        
+        //if you do not want to mess with the tree then just make a new node and join it to tail's right
+        //WON'T HAVE TO WORRY ABOUT CYCLE
         tail.right = new TreeNode(root.val);
         tail = tail.right;
         
