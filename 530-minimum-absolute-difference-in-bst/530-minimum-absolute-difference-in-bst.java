@@ -39,9 +39,10 @@ class Solution {
         
         //inorder processing -> Node operation
         if(prev!=null){
+            //if there is a value in prev then compare the diff of prev-root with our current best minDiff
             minDiff = Math.min(minDiff, Math.abs(prev.val - root.val));
         }
-        
+        //set prev = root
         prev = root;
         
         //right call
