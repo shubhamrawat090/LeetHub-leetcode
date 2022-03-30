@@ -30,9 +30,8 @@ class Solution {
         
         inorder(root.right);
         
-        int temp = root.val;
-        root.val = root.val + sum;
-        sum += temp;
+        sum += root.val;
+        root.val = sum;
         
         inorder(root.left);
     }
