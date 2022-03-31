@@ -9,7 +9,7 @@ class Solution {
             int complement = target - val;
 
             int compIdx = search(numbers, complement, i);
-            if(compIdx!=-1 && compIdx!=i){
+            if(compIdx!=-1){
                 return new int[]{i+1, compIdx+1};
             }
         }
