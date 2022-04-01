@@ -12,18 +12,22 @@ class Solution {
         //starting and ending pointer
         int i=0, j=chArr.length-1;
         
+        //jump statement: goto
         restart:
+        
         //work till the pointers meet
         while(i<j){
             //move i ptr to right for consonants
             while(!checkVowel(chArr[i])){
                 if(i<j) i++;
+                //if i>=j then go back and restart the while loop with goto statement
                 else break restart;
             }
             
             //move j ptr to right for vowels
             while(!checkVowel(chArr[j])){
                 if(j>i) j--;
+                //if j<=i then go back and restart the while loop with goto statement
                 else break restart;
             }
             
