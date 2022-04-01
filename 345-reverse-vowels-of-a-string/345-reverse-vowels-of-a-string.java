@@ -12,16 +12,19 @@ class Solution {
         //starting and ending pointer
         int i=0, j=chArr.length-1;
         
+        restart:
         //work till the pointers meet
         while(i<j){
             //move i ptr to right for consonants
-            while(i<j && !checkVowel(chArr[i])){
-                i++;
+            while(!checkVowel(chArr[i])){
+                if(i<j) i++;
+                else break restart;
             }
             
             //move j ptr to right for vowels
-            while(j>i && !checkVowel(chArr[j])){
-                j--;
+            while(!checkVowel(chArr[j])){
+                if(j>i) j--;
+                else break restart;
             }
             
             //if i and j meet that means there is only 1 vowel which does not need to be reversed
