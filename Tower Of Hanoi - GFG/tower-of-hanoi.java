@@ -43,9 +43,12 @@ class Hanoi {
         }
         long steps = 0;
         
+        //move n-1 disks to auxillary tower
         steps += toh(N-1, from, aux, to);
+        //move 1 disk from tower "from" to tower "to"
         System.out.println("move disk "+ N + " from rod "+ from + " to rod " + to);
         steps += 1;
+        //move n-1 disks back to tower "to" from "aux"
         steps += toh(N-1, aux, to, from);
         
         return steps;
