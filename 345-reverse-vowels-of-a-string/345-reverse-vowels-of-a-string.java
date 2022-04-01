@@ -27,9 +27,6 @@ class Solution {
                 else break restart;
             }
             
-            //if i and j meet that means there is only 1 vowel which does not need to be reversed
-            if(i>=j) break;
-            
             //reverse ith & jth characters which are vowels
             char temp = chArr[i];
             chArr[i] = chArr[j];
@@ -41,11 +38,6 @@ class Solution {
         }
         
         //convert char arr to string and return the ans
-        StringBuilder ans = new StringBuilder();
-        for(char ch: chArr){
-            ans.append(ch);
-        }
-        
-        return ans.toString();
+        return new String(chArr);
     }
 }
