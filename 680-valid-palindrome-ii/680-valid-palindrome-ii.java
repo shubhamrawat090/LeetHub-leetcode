@@ -61,13 +61,16 @@ class Solution {
         }
         
         if(countSkipStart == 1 || countSkipEnd == 1){
+            //delete atmost 1 character to make palindrome
             return true;
         }
         
         if(countSkipStart == 0 || countSkipEnd == 0){
+            //already palindrome
             return true;
         }
         
+        //cannot make palindrome even after deleting 1 character
         return false;
     }
 }
