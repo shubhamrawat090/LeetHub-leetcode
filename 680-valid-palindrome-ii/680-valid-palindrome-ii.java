@@ -23,28 +23,41 @@ class Solution {
         int countSkipStart = 0;
         while(i<j){
             if(s.charAt(i) != s.charAt(j)){
+                // keeping cnt of character that didn't match when skipping 1 char from start
                 countSkipStart++;
                 i++;
             }else{
                 //s.charAt(i) == s.charAt(j)
+                // if char matches increment start and decrement end
                 i++;
                 j--;
             }
+            
+            // for optimising code if cnt is greater than 1 
+            // we will just break the loop as only one char can skipped/deleted.
+            if(countSkipStart > 1) break;
         }
         
+        //reinitialise the pointers
         i=0;
         j=s.length()-1;  
         int countSkipEnd = 0;
         
         while(i<j){
             if(s.charAt(i) != s.charAt(j)){
+                // keeping cnt of character that didn't match when skipping 1 char from end
                 countSkipEnd++;
                 j--;
             }else{
                 //s.charAt(i) == s.charAt(j)
+                // if char matches increment start and decrement end
                 i++;
                 j--;
             }
+            
+            // for optimising code if cnt is greater than 1 
+            // we will just break the loop as only one char can skipped/deleted.
+            if(countSkipEnd > 1) break;
         }
         
         if(countSkipStart == 1 || countSkipEnd == 1){
