@@ -18,7 +18,6 @@ class Solution {
             i--;
         }
         
-        //Edge case
         if(i >= 0){
             //Step 2
             int j=nums.length-1;
