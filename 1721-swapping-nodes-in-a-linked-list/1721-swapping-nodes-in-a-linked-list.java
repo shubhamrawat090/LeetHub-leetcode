@@ -11,9 +11,13 @@
 class Solution {
     public ListNode swapNodes(ListNode head, int k) {
         ListNode prev = head, nxt = head;
+        
+        //move nxt to kth node(1 based indexing)
         for(int i = 1; i <= k - 1; i++)
             nxt = nxt.next;
         ListNode marker1 = nxt;
+        
+        //keep a gap of k nodes and move prev(at head) and nxt(at k node) till next reaches last node
         while(nxt.next!=null)
         {
             prev = prev.next;
