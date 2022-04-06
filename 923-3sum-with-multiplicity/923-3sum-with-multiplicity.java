@@ -19,21 +19,24 @@ class Solution {
                 // FIRST, i==j==k, C(n,3) = n!/3!(n-3)! = n*(n-1)*(n-2)/6
                 if(i==j && j==k){//all same
                     result += (count[i] * (count[i]-1) * (count[i]-2))/6;
+                    result %= mod;
                 }
                 
                 // SECOND, i==j!=k, C(n,2)*count[k] = n!/2!(n-2)!*count[k] = n*(n-1)/2*count[k]
                 else if(i==j && j!=k){//1 different
                     result += ((count[i] * (count[i]-1))/2)*count[k];
+                    result %= mod;
                 }
                 
                 // THIRD, i<j<k, count[i]*count[j]*count[k]
                 else if(i<j && j<k){//all different
                     result += count[i]*count[j]*count[k];
+                    result %= mod;
                 }
             }
         }
         
-        //convert result to int and return
+        //convert result to int, keep result in range with mod and return
         return (int)(result%mod);
     }
 }
