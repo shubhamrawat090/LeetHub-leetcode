@@ -15,29 +15,38 @@ add: TC:O(logk)
 */
 
 class KthLargest {
-    PriorityQueue<Integer> minHeap;
-    int target;
+    PriorityQueue<Integer> minHeap; //will keep the list already sorted which is why minHeap is used
+    int target; //k value
     
     public KthLargest(int k, int[] nums) {
-        minHeap = new PriorityQueue<>(k);
+        minHeap = new PriorityQueue<>(k); //keep only k elements where kth largest is at top
+        
         for(int n : nums) {
             if(minHeap.size() < k) {
+                //add our element if less than k elements are inside heap
                 minHeap.offer(n);
             } else if (n > minHeap.peek()) {
-                minHeap.poll();
-                minHeap.offer(n);
+                //if our element is greater that top of minHeap it means this element is kth largest so add it
+                minHeap.poll();// delete top element
+                minHeap.offer(n);// add our element at top
             }
         }
+        
+        //set our target to k
         this.target = k;
     }
     
     public int add(int val) {
         if(minHeap.size() < target) {
+            //add our element if less than k elements are inside heap
             minHeap.offer(val);
-        } else if(val > minHeap.peek()) {
-            minHeap.poll();
-            minHeap.offer(val);
+        } else if (val > minHeap.peek()) {
+            //if our element is greater that top of minHeap it means this element is kth largest so add it
+            minHeap.poll();// delete top element
+            minHeap.offer(val);// add our element at top
         }
+        
+        //return kth largest if heap has k elements present in it otherwise return -1
         return minHeap.size() < target ? -1 : minHeap.peek();
     }
 }
