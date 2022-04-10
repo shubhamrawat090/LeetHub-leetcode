@@ -20,7 +20,7 @@ class Solution {
             //if i is divisible by neither 3 nor 5
             else{
                 // i+"" converts integer to string
-                ans.add(i+"");
+                ans.add(Integer.toString(i));
             }
         }
         
