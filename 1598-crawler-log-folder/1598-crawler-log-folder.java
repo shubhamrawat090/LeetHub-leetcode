@@ -4,7 +4,7 @@ class Solution {
         for(String log: logs){
             if(levels == 0 && log.equals("../")){
                 continue;
-            }else if(levels!=0 && log.equals("../")){
+            }else if(log.equals("../")){
                 levels--;
             }else if(log.equals("./")){
                 continue;
