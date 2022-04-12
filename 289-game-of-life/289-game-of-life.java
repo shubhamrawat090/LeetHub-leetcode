@@ -48,6 +48,11 @@ class Solution {
     public int countNeighbour(int[][] board, int r, int c){
         int row = board.length, col = board[0].length;
         int neighbour = 0;
+        //WE CHECK IN THE BOX CONTAINING OUR 8 DIRECTIONS
+        //        X X X
+        //        X O X
+        //        X X X
+        // O is our element and X is the box we are checking in
         for(int i=r-1; i<=r+1; i++){
             for(int j=c-1; j<=c+1; j++){
                 //skip our block
