@@ -15,20 +15,18 @@
  */
 class Solution {
     public TreeNode searchBST(TreeNode root, int val) {
-        if(root==null){
+        if(root == null){
             return null;
         }
         
-        //target found at root
         if(root.val == val){
             return root;
         }
-        //target exists in left subtree, find it and return it
-        else if(val<root.val){
+        
+        if(root.val<val){
+            return searchBST(root.right, val);
+        }else{
             return searchBST(root.left, val);
         }
-        
-        //target exists in right subtree, find it and return it
-        return searchBST(root.right, val);
     }
 }
