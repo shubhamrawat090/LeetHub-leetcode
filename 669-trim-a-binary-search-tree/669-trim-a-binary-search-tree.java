@@ -25,11 +25,8 @@ class Solution {
             return trimBST(root.left, low, high);
         }
         
-        TreeNode left = trimBST(root.left, low, high);
-        TreeNode right = trimBST(root.right, low, high);
-        
-        root.left = left;
-        root.right = right;
+        root.left = trimBST(root.left, low, high);
+        root.right = trimBST(root.right, low, high);
         
         return root;
     }
