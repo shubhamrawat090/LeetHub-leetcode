@@ -1,29 +1,39 @@
 class Solution {
     public int climbStairs(int n) {
-        int[] dp = new int[n+1];
+        // int[] dp = new int[n+1];
       // return memo(n, 0, dp);
         
         //tabular
-        for(int idx = n; idx>=0; idx--){
-            if(idx == n){
-                dp[idx] = 1;
-                continue;
-            }
+//         for(int idx = n; idx>=0; idx--){
+//             if(idx == n){
+//                 dp[idx] = 1;
+//                 continue;
+//             }
 
-            int ans = 0;
+//             int ans = 0;
 
-            if(idx+1<=n){
-                ans += dp[idx+1];
-            }
+//             if(idx+1<=n){
+//                 ans += dp[idx+1];
+//             }
 
-            if(idx+2<=n){
-                ans += dp[idx+2];
-            }
+//             if(idx+2<=n){
+//                 ans += dp[idx+2];
+//             }
 
-            dp[idx] = ans;
+//             dp[idx] = ans;
+//         }
+        
+//         return dp[0];
+        
+        //space optimize
+        int next1=1, next2=1;
+        for(int idx = n-2; idx>=0; idx--){
+            int curr = next1 + next2;
+            next2 = next1;
+            next1 = curr;
         }
         
-        return dp[0];
+        return next1;
     }
     
     //memoized
