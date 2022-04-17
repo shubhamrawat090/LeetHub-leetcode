@@ -33,8 +33,10 @@ class Solution {
         if(root == null){
             return;
         }
-        
+        //LEFT CALL
         inorder(root.left);
+        
+        //NODE PROCESSING
         
         //remove cycle
         // root.left = null;
@@ -46,6 +48,7 @@ class Solution {
         tail.right = new TreeNode(root.val);
         tail = tail.right;
         
+        //RIGHT CALL
         inorder(root.right);
     }
 }
