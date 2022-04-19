@@ -4,9 +4,27 @@ class Solution {
         // return rec(n);
         
         //memoized
+        // int[] dp = new int[n+1];
+        // Arrays.fill(dp, -1);
+        // return memo(n, dp);
+        
+        //tabular
         int[] dp = new int[n+1];
-        Arrays.fill(dp, -1);
-        return memo(n, dp);
+        for(int i=0; i<=n; i++){
+            if(i == 0){
+                dp[i] = 0;
+                continue;
+            }
+
+            if(i == 1 || i == 2){
+                dp[i] = 1;
+                continue;
+            }
+
+            dp[i] = dp[i-1] + dp[i-2] + dp[i-3];      
+        }
+        
+        return dp[n]; 
     }
     
     public int rec(int n){
