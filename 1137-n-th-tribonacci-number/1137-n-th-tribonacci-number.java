@@ -9,22 +9,46 @@ class Solution {
         // return memo(n, dp);
         
         //tabular
-        int[] dp = new int[n+1];
-        for(int i=0; i<=n; i++){
-            if(i == 0){
-                dp[i] = 0;
-                continue;
-            }
+//         int[] dp = new int[n+1];
+//         for(int i=0; i<=n; i++){
+//             if(i == 0){
+//                 dp[i] = 0;
+//                 continue;
+//             }
 
-            if(i == 1 || i == 2){
-                dp[i] = 1;
-                continue;
-            }
+//             if(i == 1 || i == 2){
+//                 dp[i] = 1;
+//                 continue;
+//             }
 
-            dp[i] = dp[i-1] + dp[i-2] + dp[i-3];      
+//             dp[i] = dp[i-1] + dp[i-2] + dp[i-3];      
+//         }
+        
+//         return dp[n]; 
+        
+        //space optimized
+        int first = 0, second = 1, third = 1;
+        
+        if(n==0){
+            return first;
         }
         
-        return dp[n]; 
+        if(n==1){
+            return second;
+        }
+        
+        if(n==2){
+            return third;
+        }
+        
+        for(int i=3; i<=n; i++){
+            int val = first + second + third;
+            first = second;
+            second = third; 
+            third = val;
+        }
+        
+        return third;
     }
     
     public int rec(int n){
