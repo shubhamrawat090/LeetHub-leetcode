@@ -26,10 +26,66 @@ class Solution {
     }
     
     public int minCostClimbingStairs(int[] cost) {
-        int[] dp = new int[cost.length + 1];
-        int start0 = helper(0, cost, dp);
-        int start1 = helper(1, cost, dp);
+        //memoize
+//         int[] dp = new int[cost.length + 1];
+//         int start0 = helper(0, cost, dp);
+//         int start1 = helper(1, cost, dp);
         
-        return Math.min(start0, start1);
+//         return Math.min(start0, start1);
+        
+        //tabular
+        int[] dp = new int[cost.length+1];
+        for(int idx = cost.length; idx>=0; idx--){
+            if(idx == cost.length){
+                dp[idx] = 0;
+                continue;
+            }
+            
+            int ans = cost[idx];
+
+            int step1 = 0;
+
+            if(idx+1<=cost.length){
+                step1+=dp[idx+1];
+            }
+
+            int step2 = 0;
+
+            if(idx+2<=cost.length){
+                step2+=dp[idx+2];
+            }
+
+            dp[idx] = ans + Math.min(step1, step2);
+        }
+        
+        int cost0 = dp[0];
+        
+        dp = new int[cost.length+1];
+        for(int idx = cost.length; idx>0; idx--){
+            if(idx == cost.length){
+                dp[idx] = 0;
+                continue;
+            }
+            
+            int ans = cost[idx];
+
+            int step1 = 0;
+
+            if(idx+1<=cost.length){
+                step1+=dp[idx+1];
+            }
+
+            int step2 = 0;
+
+            if(idx+2<=cost.length){
+                step2+=dp[idx+2];
+            }
+
+            dp[idx] = ans + Math.min(step1, step2);
+        }
+        
+        int cost1 = dp[1];
+        
+        return Math.min(cost0, cost1);
     }
 }
