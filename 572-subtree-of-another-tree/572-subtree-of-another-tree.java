@@ -37,12 +37,11 @@ class Solution {
         if(parent == null && child == null){
             return true;
         }
-        if(parent != null && child == null){
+        
+        if(parent == null || child == null){
             return false;
         }
-        if(parent == null && child != null){
-            return false;
-        }
+        
         if(parent.val == child.val){
             if(isValidTree(parent.left, child.left) && isValidTree(parent.right, child.right)){
                 return true;
