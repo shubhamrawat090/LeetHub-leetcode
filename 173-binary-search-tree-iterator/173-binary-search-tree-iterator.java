@@ -31,10 +31,10 @@ class BSTIterator {
     }
 
     private void fillStack(TreeNode root){
-        if(root == null)
-            return;
-        st.push(root);
-        fillStack(root.left);
+        while(root != null){
+            st.push(root);
+            root = root.left;
+        }
     }
 }
 
