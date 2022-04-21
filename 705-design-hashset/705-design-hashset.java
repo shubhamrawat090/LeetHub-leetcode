@@ -1,5 +1,5 @@
 class MyHashSet {
-    private int numBuckets = 15000;
+    private int numBuckets = 14000;
     List<Integer>[] buckets;
     
     private int hash_function(int key){
