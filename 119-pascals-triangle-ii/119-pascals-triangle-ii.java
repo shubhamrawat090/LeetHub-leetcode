@@ -1,5 +1,8 @@
 class Solution {
     public List<Integer> getRow(int rowIndex) {
+        // in 1 based indexing
+        // nth row rth col element is found by using nCr which is the value
+        // Combination (n-1, r-1), like 5th row 3 col = comb(4,2)
         List<Integer> ans = new ArrayList<>();
         
         for(int i=0; i<=rowIndex; i++){
