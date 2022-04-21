@@ -1,5 +1,6 @@
 class Solution {
     public List<Integer> getRow(int rowIndex) {
+        // USING PASCAL TRIANGLE 1 LOGIC
         List<Integer> ans = new ArrayList<>();
         
         if(rowIndex == 0){
