@@ -1,30 +1,25 @@
 class Solution {
     public List<Integer> getRow(int rowIndex) {
-        // USING PASCAL TRIANGLE 1 LOGIC
         List<Integer> ans = new ArrayList<>();
         
-        if(rowIndex == 0){
-            ans.add(1);
-            return ans;
-        }
-        ans.add(1);
-        ans.add(1);
-        if(rowIndex == 1){  
-            return ans;
-        }
-        for(int index=1; index<rowIndex; index++){
-            List<Integer> curr = new ArrayList<Integer>();
-            curr.add(1);
-            for(int i=1; i<ans.size(); i++){
-                int sum = ans.get(i-1)+ans.get(i);
-                curr.add(sum);
+        for(int i=0; i<=rowIndex; i++){
+            if(i==0 || i==rowIndex){
+                ans.add(1);
+            }else{
+                int val = combination(rowIndex, i);
+                ans.add(val);
             }
-            curr.add(1);
-            
-            ans = new ArrayList<Integer>();
-            ans = curr;
         }
         
         return ans;
+    }
+    
+    private int combination(int n, int r){
+        long res = 1;
+        for(int i=0; i<r; i++){
+            res *= (n-i);
+            res /= (i+1);
+        }
+        return (int)res;
     }
 }
