@@ -25,9 +25,11 @@ class Solution {
             sum += root.val;
         }
         
-        sum += rangeSumBST(root.left, low, high);
+        if(low < root.val)
+            sum += rangeSumBST(root.left, low, high);
         
-        sum += rangeSumBST(root.right, low, high);
+        if(high > root.val)
+            sum += rangeSumBST(root.right, low, high);
         
         return sum;
     }
