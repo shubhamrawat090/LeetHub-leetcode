@@ -80,11 +80,6 @@ class BinaryTree
         //Code
         if(head == null) return 0;
         
-        int sum = head.data;
-        
-        sum += sumBT(head.right);
-        sum += sumBT(head.left);
-        
-        return sum;
+        return head.data + sumBT(head.right) + sumBT(head.left);
     }
 }
