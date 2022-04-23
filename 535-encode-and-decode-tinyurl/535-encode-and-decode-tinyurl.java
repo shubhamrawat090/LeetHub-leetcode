@@ -1,18 +1,20 @@
 public class Codec {
-    int key = 1;
-    HashMap<Integer,String> map = new HashMap<>();
+    int key = 1;//act as short url
+    HashMap<Integer,String> map = new HashMap<>();//stores shortURL->longURL pair
     
     // Encodes a URL to a shortened URL.
     public String encode(String longUrl) {
-        map.put(key,longUrl);
-        key++;
-        return Integer.toString(key-1);
+        //store key as the short URL(it can be anything according to the hashing function implemented, here it is just integer)
+        map.put(key,longUrl); 
+        key++;//increment the key to get a new key
+        return Integer.toString(key-1);//return that previous key where the longURL was stored in map
     }
 
     // Decodes a shortened URL to its original URL.
     public String decode(String shortUrl) {
+        //convert the shortURL to integer as the key is in int format
         int tmp = Integer.parseInt(shortUrl);
-        return map.get(tmp);
+        return map.get(tmp);//get the longURL corresponding to the key
     }
 }
 
