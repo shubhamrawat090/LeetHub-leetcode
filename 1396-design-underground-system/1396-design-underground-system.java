@@ -1,28 +1,28 @@
-class Info{
-    int id;
-    String stationName;
-    int t;
-    public Info(int id, String stationName, int t){
-        this.id = id;
-        this.stationName = stationName;
-        this.t = t;
-    }
-}
-
-class Average{
-    int sum;
-    int n;
-    public Average(){
-        this.sum=0;
-        this.n=0;
-    }
-    public Average(int sum, int n){
-        this.sum = sum;
-        this.n = n;
-    }
-}
-
 class UndergroundSystem {
+    
+    class Info{
+        int id;
+        String stationName;
+        int t;
+        public Info(int id, String stationName, int t){
+            this.id = id;
+            this.stationName = stationName;
+            this.t = t;
+        }
+    }
+
+    class Average{
+        int sum;
+        int n;
+        public Average(){
+            this.sum=0;
+            this.n=0;
+        }
+        public Average(int sum, int n){
+            this.sum = sum;
+            this.n = n;
+        }
+    }
     
     HashMap<String, Average> averageTimes;
     HashMap<Integer, Info> checks;
