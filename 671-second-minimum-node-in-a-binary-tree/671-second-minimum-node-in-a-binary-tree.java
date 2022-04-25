@@ -18,7 +18,9 @@ class Solution {
     boolean flag=false;
     
     public int findSecondMinimumValue(TreeNode root) {
-        dfs(root, root.val);//first value considered minimum
+        // root.val == min(root.left.val, root.right.val) for each internal node of the tree.
+        // due to this constraint root value is the least so we have to find any minimum greater than this
+        dfs(root, root.val);
         return (flag == true) ? res : -1;
     }
     public void dfs(TreeNode root,int min){
@@ -30,9 +32,10 @@ class Solution {
         //if any value > min then we have found atleast 2 distince values => 2nd min can be found
         if(root.val>min){
             flag = true;//2nd min possible
-            res = Math.min(res, root.val);
+            res = Math.min(res, root.val);//find min b/w val>lowest value and our res
         }
         
+        //process left and right subtree
         dfs(root.left, min);
         dfs(root.right, min);
     }
