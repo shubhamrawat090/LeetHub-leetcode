@@ -21,10 +21,6 @@ class Solution {
     }
     
     public void preorder(TreeNode root, StringBuilder res){
-        if(root==null){
-            res.append("()");
-            return;
-        }
         
         res.append(root.val);
         
