@@ -1,3 +1,5 @@
+/////////////////////////// MINIMUM SPANNING TREE - PRIM'S ALGORITHM //////////////////////////////////
+
 class Solution {
     public int minCostConnectPoints(int[][] points) {
         int len = points.length;
@@ -8,7 +10,7 @@ class Solution {
         }
         // visited[node] == true if node in mst
         boolean[] visited = new boolean[len];
-        visited[0] = true;
+        visited[0] = true;//start from 0 node
         
         int numEdge = 0;
         // current node, used to update the disArr
@@ -23,7 +25,9 @@ class Solution {
                 // if the node i is not in mst
                 if (!visited[i]) {
                     // find the distance between cur and i
-                    int dis = Math.abs(points[cur][0] - points[i][0]) + Math.abs(points[cur][1] - points[i][1]);
+                    int xDist = Math.abs(points[cur][0] - points[i][0]);
+                    int yDist = Math.abs(points[cur][1] - points[i][1]);
+                    int dis = xDist + yDist;
                     // update distance array
                     disArr[i] = Math.min(dis, disArr[i]);
                     // find the shortest edge
