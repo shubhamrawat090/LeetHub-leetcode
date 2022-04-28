@@ -1,4 +1,5 @@
-// Dijkstra's algorithm : In this ques it will be use to stop us when we reach the bottom right hand corner. It works by taking 1 step at a time and calculating the cost of moving to the conencted vertices.
+// Dijkstra's algorithm : In this ques it will be use to stop us when we reach the bottom right hand corner. It works by taking 1 step at a time and calculating the cost of moving to the connected vertices.
+
 // Main Logic behind it will be-
 
 // In our case we are intersted in the maximum changed height in a path, we want to minimize it, and not the total cost of the path.
@@ -7,7 +8,7 @@
 
 // To ensure that we are working on the potential cheapest path for that we keep track of unprocessed nodes that have lowest cost by using a priority queue .
 
-// This problem is similar to finding the shorted path between two points in a network. This can aslo be solved using Djikstra's Algorithm.
+// This problem is similar to finding the shortest path between two points in a network. This can also be solved using Djikstra's Algorithm.
 
 class Solution {
     public int minimumEffortPath(int[][] heights) {
@@ -58,7 +59,7 @@ class Solution {
 					// Effort is related to max height difference
                     int veffort = Math.max(effort, Math.abs(heights[row][col]-heights[vertex[ROW]][vertex[COL]]));
 					// If we already have a lower effort for this vertex then no need to add it to priority queue
-					// because it is already inthe queue with a lower cost
+					// because it is already in the queue with a lower cost
                     if (veffort < best[row][col]) {
                         best[row][col] = veffort;
                         queue.add(new int[]{row, col, veffort});
