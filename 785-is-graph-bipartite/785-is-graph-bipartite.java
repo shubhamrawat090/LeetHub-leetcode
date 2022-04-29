@@ -3,7 +3,7 @@
 // 1 = blue
 // -1 = red
 
-
+// TIME: O(V+E), SPACE: O(V)
 class Solution {
     public boolean isBipartite(int[][] g) {
         int[] colors = new int[g.length];//color for each node in graph
