@@ -69,14 +69,7 @@ class Solution {
         }
     }
     
-    //driver function
-    public int maxProfit(int[] arr) {
-        int n = arr.length;
-        // return rec(0, 0, arr);//gives TLE
-        dp = new int[arr.length+1][2];
-        // return memo(0, 0, arr); //still gives TLE
-        
-        //tabulation
+    public int tabulate(int[] arr, int n) {
         for(int idx = n; idx >= 0; idx--) {
             for(int flag = 0; flag < 2; flag ++) {
                 if(idx == n) {
@@ -97,5 +90,16 @@ class Solution {
         }
         
         return dp[0][0];
+    }
+    
+    //driver function
+    public int maxProfit(int[] arr) {
+        int n = arr.length;
+        // return rec(0, 0, arr);//gives TLE
+        dp = new int[arr.length+1][2];
+        // return memo(0, 0, arr); //still gives TLE
+        
+        //tabulation
+        return tabulate(arr, n);
     }
 }
