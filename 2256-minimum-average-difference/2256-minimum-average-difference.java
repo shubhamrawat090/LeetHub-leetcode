@@ -1,35 +1,35 @@
 class Solution {
     public int minimumAverageDifference(int[] nums) {
-        long sum = 0;
-        int lC = 0;
-        int rC = nums.length;
+        long rSum = 0;
+        int lCtr = 0;
+        int rCtr = nums.length;
         long lSum = 0;
         
-        long lA, rA;
+        long lAvg, rAvg;
         long minAverage = 1_000_000;
         long diff;
-        int result = 0;
+        int minAvgIdx = 0;
         
         for (int num : nums)
-            sum += num;
+            rSum += num;
         
         for (int i = 0; i < nums.length; ++i){
-            ++lC;
-            --rC;
+            ++lCtr;
+            --rCtr;
             
             lSum += nums[i];
-            sum -= nums[i];
+            rSum -= nums[i];
             
-            lA = lSum/ lC;
-            rA = rC == 0 ? 0 : sum / rC;
-            diff = Math.abs(lA - rA);
+            lAvg = lSum/ lCtr;
+            rAvg = rCtr == 0 ? 0 : rSum / rCtr;
+            diff = Math.abs(lAvg - rAvg);
             
             if (diff < minAverage){
                 minAverage = diff;
-                result = i;
+                minAvgIdx = i;
             }
         }
         
-        return result;
+        return minAvgIdx;
     }
 }
