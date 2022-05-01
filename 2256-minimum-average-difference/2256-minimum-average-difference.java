@@ -1,20 +1,35 @@
 class Solution {
-    // Calculate the sum first and then minus the left sum in te for loop.
-
     public int minimumAverageDifference(int[] nums) {
-        int len = nums.length, res = 0;
-        long min = Integer.MAX_VALUE, sum = 0, leftSum = 0, rightSum = 0;
+        long sum = 0;
+        int lC = 0;
+        int rC = nums.length;
+        long lSum = 0;
+        
+        long lA, rA;
+        long minAverage = 1_000_000;
+        long diff;
+        int result = 0;
+        
         for (int num : nums)
             sum += num;
-        for (int i = 0; i < len; i++) {
-            leftSum += nums[i];
-            rightSum = sum - leftSum;
-            long diff = Math.abs(leftSum / (i + 1) - (len - i == 1 ? 0 : rightSum / (len -i - 1)));
-            if (diff < min) {
-                min = diff;
-                res = i;
+        
+        for (int i = 0; i < nums.length; ++i){
+            ++lC;
+            --rC;
+            
+            lSum += nums[i];
+            sum -= nums[i];
+            
+            lA = lSum/ lC;
+            rA = rC == 0 ? 0 : sum / rC;
+            diff = Math.abs(lA - rA);
+            
+            if (diff < minAverage){
+                minAverage = diff;
+                result = i;
             }
         }
-        return res;
+        
+        return result;
     }
 }
