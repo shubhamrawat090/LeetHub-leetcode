@@ -92,17 +92,7 @@ class Solution {
 //         return dp[0][0];
 //     }
     
-    //driver function
-    public int maxProfit(int[] arr) {
-        int n = arr.length;
-        // return rec(0, 0, arr);//gives TLE
-        // dp = new int[arr.length+1][2];
-        // return memo(0, 0, arr); //still gives TLE
-        
-        //tabulation
-        // return tabulate(arr, n);
-        
-        //space optimized
+    public int spaceOptimized(int[] arr, int n) {
         int[] prev = new int[2];
         int[] curr = new int[2];
         for(int idx = n; idx >=0; idx--) {
@@ -127,5 +117,19 @@ class Solution {
         }
         
         return prev[0];
+    }
+    
+    //driver function
+    public int maxProfit(int[] arr) {
+        int n = arr.length;
+        // return rec(0, 0, arr);//gives TLE
+        // dp = new int[arr.length+1][2];
+        // return memo(0, 0, arr); //still gives TLE
+        
+        //tabulation
+        // return tabulate(arr, n);
+        
+        //space optimized
+        return spaceOptimized(arr, n);
     }
 }
