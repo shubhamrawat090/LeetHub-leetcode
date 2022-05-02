@@ -1,3 +1,4 @@
+// Using partition of an array method
 class Solution {
     public int[] sortArrayByParity(int[] nums) {
         int left = 0, right = 0;
