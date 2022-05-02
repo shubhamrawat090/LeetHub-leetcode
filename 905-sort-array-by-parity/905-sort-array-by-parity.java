@@ -7,9 +7,9 @@ class Solution {
             if(nums[left] % 2 != 0) {
                 if(nums[right] % 2 == 0) {
                     //swap left and right
-                    int temp = nums[left];
-                    nums[left] = nums[right];
-                    nums[right] = temp;
+                    nums[left] = nums[left] ^ nums[right];
+                    nums[right] = nums[left] ^ nums[right];
+                    nums[left] = nums[left] ^ nums[right];
                     
                     left++;
                 }
