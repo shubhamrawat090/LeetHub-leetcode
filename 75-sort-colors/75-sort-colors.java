@@ -1,33 +1,30 @@
 class Solution {
+    //i -> 0's region
+    //j -> 1's region
+    //k -> 2's region
     public void sortColors(int[] nums) {
-        int one = 0, zero = 0, two = 0;
-        for(int num: nums) {
+        int i = 0, j = 0, k = nums.length-1;
+        while(j<=k) {
+            int num = nums[j];
             if(num == 0) {
-                zero++;
+                swap(nums, i, j);
+                i++;
+                j++;
             }
-            
-            if(num == 1) {
-                one++;
+            else if(num == 1) {
+                j++;
             }
-            
-            if(num == 2){
-                two++;
+            else {
+                swap(nums, j, k);
+                //j++ is not done here as the no's ahead are not known to us so we don't know for sure which no. came at j's position after swapping
+                k--;
             }
         }
-        int i=0;
-        for(int j=0; j<zero; j++) {
-            nums[i] = 0;
-            i++;
-        }
-        
-        for(int j=0; j<one; j++) {
-            nums[i] = 1;
-            i++;
-        }
-        
-        for(int j=0; j<two; j++) {
-            nums[i] = 2;
-            i++;
-        }
+    }
+    
+    public void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 }
