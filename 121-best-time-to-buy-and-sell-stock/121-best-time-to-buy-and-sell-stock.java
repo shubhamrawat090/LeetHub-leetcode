@@ -1,15 +1,19 @@
 class Solution {
+    
+    // Time Complexity: O(n)
+    // Space Complexity: O(1)
+    // Algorithm: 
+    // - Iterate through the array keeping track of minimum so far
+    // - At each step check if we can maximise our profit
     public int maxProfit(int[] prices) {
-        int ans = 0, minTillNow = prices[0];
-        int n = prices.length;
-        for(int i=1; i<n; i++) {
-            if(prices[i] < minTillNow) {
-                minTillNow = prices[i];
-            }
+        int minSoFar = Integer.MAX_VALUE, maxProfit = 0;
+        
+        for(int i = 0; i < prices.length; i++) {      
+            minSoFar = Math.min(minSoFar, prices[i]);
+            maxProfit = Math.max(maxProfit, prices[i] - minSoFar);
             
-            int profit = prices[i] - minTillNow;
-            ans = Math.max(ans, profit);
         }
-        return ans;
+        
+        return maxProfit;
     }
 }
