@@ -1,40 +1,26 @@
-// Time: O(N), Space: O(N)
+// We need two stacks, one is to store arr characters, the other one is to store counts. Since stack peek index <= runner index, we can use string's char array as stack.
+
 class Solution {
     public String removeDuplicates(String s, int k) {
-        //in stack we store values like {char, count} and if the count matches k then we remove the value from stack
-        Stack<int[]> main = new Stack<>();
-        
-        for(char c: s.toCharArray()){
-            //main.peek()[0] -> character
-            //main.peek()[1] -> count
-            
-            //if top char of stack matches our curr string char, then we increment the count
-            if(!main.isEmpty() && main.peek()[0] == c){
-                main.peek()[1]++;
-            }
-            //otherwise we just push the character with count = 1
-            else{
-                main.push(new int[]{c,1});
-            }
-            
-            //if our count matches k then we pop it
-            if(main.peek()[1]==k){
-                main.pop();
+        char[] arr = s.toCharArray();
+        int n = arr.length;
+        int[] count = new int[n];
+        int top = -1;
+        for (int i = 0; i < n; i++) {
+            if (top == -1) {
+                ++top;
+                arr[top] = arr[i];
+                count[top] = 1;
+            } else {
+                if (top >= 0 && arr[top] == arr[i] && (count[top] + 1) == k) {
+                    top -= k - 1;
+                } else {
+                    top++;
+                    count[top] = (arr[top - 1] == arr[i] ? (count[top - 1] + 1) : 1);
+                    arr[top] = arr[i];
+                }
             }
         }
-        
-        //convert resultant stack to string using stringbuilder
-        StringBuilder sb= new StringBuilder();
-        
-        while(!main.isEmpty()){
-            int[] top = main.pop();
-            
-            //append the char count no. of times
-            while(top[1]-->0)
-                sb.append((char) top[0]);
-        }
-        
-        //reverse as stack is in LIFO
-        return sb.reverse().toString();
+        return new String(arr, 0, top + 1);
     }
 }
