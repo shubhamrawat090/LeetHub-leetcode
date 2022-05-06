@@ -1,3 +1,4 @@
+// Time: O(N), Space: O(N)
 class Solution {
     public String removeDuplicates(String s, int k) {
         //in stack we store values like {char, count} and if the count matches k then we remove the value from stack
