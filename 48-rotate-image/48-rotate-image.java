@@ -1,3 +1,4 @@
+// Time: O(N*N), Space: O(1)
 class Solution {
     public void rotate(int[][] matrix) {
         int n = matrix.length;
