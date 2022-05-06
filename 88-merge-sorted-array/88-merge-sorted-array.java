@@ -1,3 +1,5 @@
+// Gap Method
+// Time: O(logN), Space: O(1)
 class Solution {
     public void swap(int[] ar1, int[] ar2, int i, int j)
     {
