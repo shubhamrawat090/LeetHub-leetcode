@@ -12,15 +12,22 @@ class Solution {
                 arr[top] = arr[i];
                 count[top] = 1;
             } else {
+                //if curr character matches stack top and stack top's count + 1(that of curr char)
+                //matches k then we just need to remove k-1 chars in stack + 1(our curr char)
                 if (top >= 0 && arr[top] == arr[i] && (count[top] + 1) == k) {
                     top -= k - 1;
-                } else {
+                } 
+                //otherwise push character in stack with incrementing top
+                else {
                     top++;
-                    count[top] = (arr[top - 1] == arr[i] ? (count[top - 1] + 1) : 1);
+                    //if stack top's char matches our current char then increment our count 
+                    //otherwise put count=1 for new char encountered
+                    count[top] = (arr[top - 1] == arr[i]) ? (count[top - 1] + 1) : 1;
                     arr[top] = arr[i];
                 }
             }
         }
+        //convert stack to string
         return new String(arr, 0, top + 1);
     }
 }
