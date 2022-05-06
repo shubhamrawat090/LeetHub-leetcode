@@ -1,35 +1,41 @@
 class Solution {
-    public void merge(int[] arr1, int n, int[] arr2, int m) {
-        int k;
-        if(m == 0) {
-            return;
-        }
-        for (int i = 0; i < n; i++) {
-          // take first element from arr1 
-          // compare it with first element of second array
-          // if condition match, then swap
-          if (arr1[i] > arr2[0]) {
-            int temp = arr1[i];
-            arr1[i] = arr2[0];
-            arr2[0] = temp;
-          }
-
-          // then sort the second array
-          // put the element in its correct position
-          // so that next cycle can swap elements correctly
-          int first = arr2[0];
-          // insertion sort is used here
-          for (k = 1; k < m && arr2[k] < first; k++) {
-            arr2[k - 1] = arr2[k];
-          }
-          arr2[k - 1] = first;
-        }
+    public void swap(int[] ar1, int[] ar2, int i, int j)
+    {
+        int temp = ar1[i];
+        ar1[i] = ar2[j];
+        ar2[j] = temp;
+    }
+    
+    public void merge(int[] ar1, int n, int[] ar2, int m) {
+        int gap =(int) Math.ceil((double)(n + m) / 2.0);
         
+        while (gap > 0) {
+            int i = 0;
+            int j = gap;
+            
+            while (j < (n + m)) {
+                if (j < n && ar1[i] > ar1[j]) {
+                    swap(ar1, ar1, i, j);
+                } else if (j >= n && i < n && ar1[i] > ar2[j - n]) {
+                    swap(ar1, ar2, i, j-n);
+                } else if (j >= n && i >= n && ar2[i - n] > ar2[j - n]) {
+                    swap(ar2, ar2, i - n, j - n);
+                }
+                j++;
+                i++;
+            }
+            
+            if (gap == 1) {
+                gap = 0;
+            } else {
+                gap =(int) Math.ceil((double) gap / 2.0);
+            }
+        }
+
         int itr1 = n;
         for(int j=0; j<m; j++) {
-            arr1[itr1] = arr2[j];
+            ar1[itr1] = ar2[j];
             itr1++;
-        }
-        
+        } 
     }
 }
