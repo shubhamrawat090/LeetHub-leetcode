@@ -5,7 +5,7 @@ class Solution {
         
         int row = 0, col = n-1;
         
-        while(row<n) {
+        while(row<n || col>=0) {
             for(int i=0; i<n; i++) {
                 tempMatrix[i][col] = matrix[row][i];
             }
