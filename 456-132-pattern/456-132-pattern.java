@@ -1,17 +1,17 @@
-// Using the given array itself as stack
+// Using the given array itself as stack (bottom on the right end)
 class Solution {
     public boolean find132pattern(int[] nums) {
         int kThElement = Integer.MIN_VALUE;
-        int index = nums.length; //using nums itself as the stack (bottom on the right end)
+        int top = nums.length;
         for(int j=nums.length-1; j>=0; j--){
             if(nums[j]<kThElement) return true;
             
             else{
-                while(index<nums.length && nums[j]>nums[index]) 
-                    kThElement = nums[index++];
+                while(top<nums.length && nums[j]>nums[top]) 
+                    kThElement = nums[top++];
             }
             //push in stack
-            nums[--index] = nums[j];
+            nums[--top] = nums[j];
         }
         return false;
     }
