@@ -1,39 +1,40 @@
-//Better: Using Stack
-//Space: O(n) Time O(n)
 class Solution {
     public boolean find132pattern(int[] nums) {
-        int n = nums.length;
-        int[] min = new int[n];
+        if(nums==null||nums.length<3) 
+            return false;
         
-        min[0] = nums[0];
+        int[] min=new int[nums.length];
+        int[] max=new int[nums.length];
         
-        //filling min arr with Minimum(prev min[i-1], curr nums[i])
-        for(int i=1; i<n; i++) {
-            min[i] = Math.min(min[i-1], nums[i]);
-        }
+        min[0]=nums[0];
+        max[0]=nums[0];
         
-        Stack<Integer> st = new Stack<>();
-        
-        for(int j=n-1; j>=0; j--) {
-            //min[j] signifies ith element
-            //only if jth element > ith element
-            if(nums[j] > min[j]) {
-                //st.peek() signifies kth element
-                //remove all kth elements from stack which are less than or equal to ith element
-                while(!st.isEmpty() && st.peek()<=min[j]) {
-                    st.pop();
+        for(int i=1;i<nums.length;i++){
+            
+            if(nums[i]>=max[i-1]){
+                max[i]=nums[i];
+                min[i]=min[i-1];
+            }
+            
+            else if(nums[i]<=min[i-1]){
+                min[i]=nums[i];
+                max[i]=max[i-1];
+            }
+            
+            else{
+                int j=0;
+                
+                for( j=i-1;j>=1;j--){
+                    if(nums[j]>nums[i]) break;
                 }
                 
-                //if the stack is not empty and there is a kth element < jth element, we have found 132 sequence
-                if(!st.isEmpty() && st.peek()<nums[j]) {
-                    return true;
-                }
+                if(j>=1&&min[j-1]<nums[i]) return true;
                 
-                //if not 132 sequence has been found yet, try for other j keeping this nums[j] as kth element
-                st.push(nums[j]); 
+                max[i]=max[i-1];
+                min[i]=min[i-1];
             }
         }
-        //no such 132 sequence found
+        
         return false;
     }
 }
