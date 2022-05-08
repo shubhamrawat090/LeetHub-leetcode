@@ -25,8 +25,11 @@ class Solution {
         while(curr!=null) {
             //storing the ahead LL so that we don't lose the LL ahead while reversing the link of curr ptr
             ListNode ahead = curr.next;
+            //reversing the link of curr to prev
             curr.next = prev;
+            //setting prev to curr node for next node
             prev = curr;
+            //updating curr to next node
             curr = ahead;
         }
         
