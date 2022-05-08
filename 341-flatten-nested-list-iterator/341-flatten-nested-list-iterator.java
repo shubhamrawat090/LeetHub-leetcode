@@ -16,19 +16,26 @@
  * }
  */
 public class NestedIterator implements Iterator<Integer> {
-    private List<Integer> intList = new ArrayList<>();
+    //list for containing the final list with flattened values
+    private List<Integer> flattenList = new ArrayList<>();
+    //iterator for our list
     private int idx = 0;
     
     public NestedIterator(List<NestedInteger> nestedList) {
+        //traverse the nested list and pass them to a helper function for flattenning
         for(NestedInteger listItem: nestedList) {
             flatten(listItem);
         }
     }
     
     private void flatten(NestedInteger listItem) {
+        //if our list item is integer we just add it to the flatten list
         if(listItem.isInteger()) {
-            intList.add(listItem.getInteger());
-        }else {
+            flattenList.add(listItem.getInteger());
+        }
+        //otherwise, we have encounted another list inside our list item
+        //pass each item of that sublist to flatten function for flattenning
+        else {
             for(NestedInteger subListItem: listItem.getList())
                 flatten(subListItem);
         }
@@ -36,12 +43,15 @@ public class NestedIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        return intList.get(idx++);
+        //get the value at our current index and increment the index
+        return flattenList.get(idx++);
     }
 
     @Override
     public boolean hasNext() {
-        return idx < intList.size();
+        //if our idx < size of the list then there is a next possible.
+        //otherwise, not
+        return idx < flattenList.size();
     }
 }
 
