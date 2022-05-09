@@ -1,3 +1,4 @@
+//other solution using array storing the mapping of no. to digits
 class Solution {
     public static String[] map = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
     
