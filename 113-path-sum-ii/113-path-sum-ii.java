@@ -28,8 +28,10 @@ class Solution {
         
         path.add(root.val);
             
-        if(root.left == null && root.right == null && root.val == target) {
-            res.add(new ArrayList<>(path));
+        if(root.left == null && root.right == null) {
+            if(root.val == target) {
+                res.add(new ArrayList<>(path));
+            }
         } else {
             helper(root.left, target-root.val, res, path);
             helper(root.right, target-root.val, res, path);
