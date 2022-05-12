@@ -1,23 +1,22 @@
 class Solution {
-    // We will use BACKTRACKING 
-    //               1 2 3   swap 2 & 3 => 1 3 2
-    // swap 1 & 2 => 2 1 3   swap 1 & 3 => 2 3 1
-    // swap 1 & 3 => 3 1 2   swap 1 & 2 => 3 2 1
+    // We will use BACKTRACKING to go from 3. to 1. state or 2. state to make next 2 elements swap
+    // 1.               1 2 3   swap 2 & 3 => 1 3 2
+    // 2. swap 1 & 2 => 2 1 3   swap 1 & 3 => 2 3 1
+    // 3. swap 1 & 3 => 3 1 2   swap 1 & 2 => 3 2 1
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
-        
+        //recursive helper function
         helper(res, nums, 0);
-        
         return res;
     }
     
     private void helper(List<List<Integer>> res, int[] nums, int idx) {
         if(idx == nums.length) {
-            // List<Integer> list = new ArrayList<>();
-            // for(int num: nums) {
-            //     list.add(num);
-            // }
-            List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
+            //convert our nums[] to list and add it to res list
+            List<Integer> list = new ArrayList<>();
+            for(int num: nums) {
+                list.add(num);
+            }
             res.add(list);
             return;
         }
