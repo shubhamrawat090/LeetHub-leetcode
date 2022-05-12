@@ -16,12 +16,18 @@
 class Solution {
     public boolean isUnivalTree(TreeNode root) {
         if(root == null) return false;
-        return helper(root, root.val);
-    }
-    
-    private boolean helper(TreeNode root, int val) {
-        if(root == null) return true;
+        Queue<TreeNode> q = new ArrayDeque<>();
+        int val = root.val;
+        q.add(root);
         
-        return (val == root.val) && helper(root.left, val) && helper(root.right, val);
+        while(q.size()!=0) {
+            TreeNode curr = q.remove();
+            if(curr.val != val) return false;
+            
+            if(curr.left!=null) q.add(curr.left);
+            if(curr.right!=null) q.add(curr.right);
+        }
+        
+        return true;
     }
 }
