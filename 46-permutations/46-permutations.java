@@ -13,10 +13,11 @@ class Solution {
     
     private void helper(List<List<Integer>> res, int[] nums, int idx) {
         if(idx == nums.length) {
-            List<Integer> list = new ArrayList<>();
-            for(int num: nums) {
-                list.add(num);
-            }
+            // List<Integer> list = new ArrayList<>();
+            // for(int num: nums) {
+            //     list.add(num);
+            // }
+            List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
             res.add(list);
             return;
         }
