@@ -14,6 +14,7 @@
  * }
  */
 class Solution {
+    // Time O(N) Space O(N)
     public boolean leafSimilar(TreeNode root1, TreeNode root2) {
         List<Integer> list1 = new ArrayList<>();
         getList(root1, list1);
