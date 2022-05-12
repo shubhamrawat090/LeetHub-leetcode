@@ -40,6 +40,7 @@ class Solution {
     }
     
     private boolean canPermutate(int[] nums, int curr, int idx) {
+        // if you swap same nos. => no change will be made and 2 duplicate values will be inserted
         for(int i=idx; i<curr; i++) {
             if(nums[i] == nums[curr]){
                 return false;
