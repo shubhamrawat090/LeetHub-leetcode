@@ -22,6 +22,7 @@ class Node {
 */
 
 class Solution {
+    //BFS LEVEL ORDER
     public Node connect(Node root) {
         if(root == null) return null;
         Queue<Node> q = new ArrayDeque<>();
@@ -33,11 +34,9 @@ class Solution {
                 Node curr = q.remove();
                 if(i == size-1) {
                     curr.next = null;
-                    if(curr.left!=null) q.add(curr.left);
-                    if(curr.right!=null) q.add(curr.right); 
-                    continue;
+                }else {
+                    curr.next = q.peek();
                 }
-                curr.next = q.peek();
 
                 if(curr.left!=null) q.add(curr.left);
                 if(curr.right!=null) q.add(curr.right);  
