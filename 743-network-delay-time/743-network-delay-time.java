@@ -1,3 +1,7 @@
+////////////// 2-step process ///////////////////////
+
+// 1. Traverse the graph & update dist. values
+// 2. Find max distance (if all nodes are traversed)
 class Solution {
     public class Edge{
         int dst;
@@ -29,7 +33,7 @@ class Solution {
         });
         pq.add(src);
         int [] len = new int[N+1];
-        Arrays.fill(len,(int)1e8);
+        Arrays.fill(len,Integer.MAX_VALUE);
         len[K] = 0;
         int time = 0;
         while(pq.size()!=0){
@@ -45,7 +49,7 @@ class Solution {
     }
         for(int i=1;i<=N;++i)
         {
-            if(len[i]==(int)1e8)
+            if(len[i]==Integer.MAX_VALUE)
                 return -1;
             time = Math.max(time,len[i]);
         }
