@@ -14,17 +14,33 @@
  * }
  */
 class Solution {
-    int count;
     public int countNodes(TreeNode root) {
-        count = 0;
-        helper(root);
-        return count;
+       return helper(root);
     }
-    
-    private void helper(TreeNode root) {
-        if(root == null) return;
-        count++;
-        helper(root.left);
-        helper(root.right);
+
+    public int helper(TreeNode root) {
+        if(root==null) return 0;
+        
+        int l=0;
+        int r=0;
+        
+        //find lowest level on left side
+        TreeNode current=root;
+        while(current!=null) {
+            l++;
+            current=current.left;
+        }
+        
+        //find lowest level on right side
+        current=root;
+        while(current!=null) {
+            r++;
+            current=current.right;
+        }
+        
+        //if a complete binary tree(then left and right ends are on same level) exists then nodes = 2^L-1
+        if(l==r) return (int)Math.pow(2,l)-1;
+        //otherwise traverse on left and right side
+        else return 1+helper(root.left)+helper(root.right);
     }
 }
