@@ -28,17 +28,19 @@ class Solution {
         }
 
         if(root.left == null && root.right == null) {
-
+            //if leaf node reached and current level is the deepest
             if(deepestLevel == level) {
                 deepestSum += root.val;
             }
+            //finding deepest level
             else if(deepestLevel < level){
                 deepestSum = root.val;
                 deepestLevel = level;
             } 
         }
-
-        traverse(root.left, level + 1);
-        traverse(root.right, level + 1);
+        
+        //go to left and right subtree
+        traverse(root.left, level+1);
+        traverse(root.right, level+1);
     }
 }
