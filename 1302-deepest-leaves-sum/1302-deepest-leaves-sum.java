@@ -15,11 +15,14 @@
  */
 class Solution {
     public int deepestLeavesSum(TreeNode root) {
+        //find maximum height
         int maxHt = height(root);
+        //add node values which have height = maxHt
         return sumHelper(root, maxHt);
     }
     
-    int height(TreeNode root) {
+    //maxHeight
+    private int height(TreeNode root) {
         if(root == null) {
             return 0;
         }
@@ -30,7 +33,8 @@ class Solution {
         return 1 + Math.max(leftHt, rightHt);
     }
     
-    int sumHelper(TreeNode root, int maxHt) {
+    //sum finder
+    private int sumHelper(TreeNode root, int maxHt) {
         if(root == null) {
             return 0;
         }
