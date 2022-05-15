@@ -29,12 +29,12 @@ class Solution {
 
         if(root.left == null && root.right == null) {
 
-            if(this.deepestLevel == level) {
-                this.deepestSum += root.val;
+            if(deepestLevel == level) {
+                deepestSum += root.val;
             }
-            else if(this.deepestLevel < level){
-                this.deepestSum = root.val;
-                this.deepestLevel = level;
+            else if(deepestLevel < level){
+                deepestSum = root.val;
+                deepestLevel = level;
             } 
         }
 
