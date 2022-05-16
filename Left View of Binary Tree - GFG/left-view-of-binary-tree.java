@@ -121,35 +121,23 @@ class Node
 }*/
 class Tree
 {
-    //Function to return list containing elements of left view of binary tree.
-    ArrayList<Integer> leftView(Node root)
-    {
-        ArrayList<Integer> ans = new ArrayList<>();
-        if(root == null) {
-            return ans;
+    ArrayList<Integer> res = new ArrayList<>();
+    int maxDepth = -1;
+    public ArrayList<Integer> leftView(Node root) {
+        if (root == null) return res;
+        helper(root, 0);
+        return res;
+    }
+    public void helper(Node node, int depth) {
+        if (node == null) {
+            return;
         }
-        
-        Queue<Node> q = new ArrayDeque<>();
-        
-        q.add(root);
-        
-        while(q.size()!=0){
-            int count = q.size();
-            
-            //here queue's top is the left most node at that particular level
-            ans.add(q.peek().data);
-            while(count-->0){
-                Node curr = q.remove();
-                
-                if(curr.left!=null){
-                    q.add(curr.left);
-                }
-                if(curr.right!=null){
-                    q.add(curr.right);
-                }
-            }
+        if (depth > maxDepth) {
+            res.add(node.data);
         }
-        
-        return ans;
+        maxDepth = Math.max(maxDepth, depth);
+        helper(node.left, depth+1);
+        helper(node.right, depth+1);
+
     }
 }
