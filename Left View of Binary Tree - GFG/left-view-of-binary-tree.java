@@ -124,51 +124,30 @@ class Tree
     //Function to return list containing elements of left view of binary tree.
     ArrayList<Integer> leftView(Node root)
     {
-      // Your code here
-      ArrayList<ArrayList<Integer>> levels = levelOrder(root);
-      ArrayList<Integer> ans = new ArrayList<>();
-      
-      for(ArrayList<Integer> level: levels){
-          ans.add(level.get(0));
-      }
-      
-      return ans;
-    }
-    
-    public ArrayList<ArrayList<Integer>> levelOrder(Node root) {
-        if(root == null) return new ArrayList<>();
+        ArrayList<Integer> ans = new ArrayList<>();
+        if(root == null) {
+            return ans;
+        }
         
-        //list containing all nodes levelwise
-        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
-        
-        //queue for processing
         Queue<Node> q = new ArrayDeque<>();
         
-        //add root to queue
         q.add(root);
         
-        //work till queue is empty
-        while(!q.isEmpty()){
-            //currently queue contains nodes of a particular so do this size no. of times
+        while(q.size()!=0){
             int count = q.size();
             
-            //list for nodes of current level
-            ArrayList<Integer> levels = new ArrayList<>();
-            
-            while(count-- > 0){
-                //remove front node of queue as it contains first node of that level from left -> right
+            //here queue's top is the left most node at that particular level
+            ans.add(q.peek().data);
+            while(count-->0){
                 Node curr = q.remove();
-                //add that value to levels list
-                levels.add(curr.data);
                 
-                //get the left child of current tree if it exists
-                if(curr.left!=null) q.add(curr.left);
-                //get the right child of current tree if it exists
-                if(curr.right!=null) q.add(curr.right);
+                if(curr.left!=null){
+                    q.add(curr.left);
+                }
+                if(curr.right!=null){
+                    q.add(curr.right);
+                }
             }
-            
-            //add that level to our ans
-            ans.add(levels);
         }
         
         return ans;
