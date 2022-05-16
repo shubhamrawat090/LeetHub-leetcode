@@ -28,9 +28,6 @@ class Solution {
         List<Integer> levels = new ArrayList<>();
         
         while(q.size()>0){
-            
-            int count = q.size();
-            
             TreeNode curr = q.remove();
             
             if(curr != null) {
