@@ -125,6 +125,7 @@ class Node{
 
 class Solution
 {
+    //pair class storing node and it's vertical level
     static class Pair {
         Node node;
         int vertical = 0;
