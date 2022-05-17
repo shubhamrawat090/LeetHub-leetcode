@@ -111,96 +111,69 @@ class Solution
 	ArrayList <Integer> boundary(Node node)
 	{
 	    ArrayList<Integer> ans = new ArrayList<>();
-	    if(node == null){
-	        //if tree doesn't exist then return empty arraylist
-	        return ans;
-	    }
-	    ans.add(node.data);//add root's data
-	    if(node.left==null && node.right==null){
-	        //if root is a leaf node then return only root's data
-	        return ans;
-	    }
-	   //root to left most path
-	   ArrayList<Integer> leftMost = new ArrayList<>();
-	   //send left child and not the root so that root doesn't repeat in answer
-	   rootToLeftMost(node.left, leftMost); 
-	   
-	   //all leaf nodes except in leftmost and rightmost paths
-	   ArrayList<Integer> leafs = new ArrayList<>();
-	   //send right child and not the root so that root doesn't repeat in answer
-	   allLeafs(node, leafs);
-	   
-	   //right most to root path
-	   ArrayList<Integer> rightMost = new ArrayList<>();
-	   rightMostToRoot(node.right, rightMost);
-	   
-	   ans.addAll(leftMost);
-	   ans.addAll(leafs);
-	   ans.addAll(rightMost);
-	   
-	   return ans;
-	}
-	
-	void rootToLeftMost(Node node, ArrayList<Integer> lm){
-	   if(node == null){//no node exists
-	       return;
-	   } 
-	   
-	   if(node.left==null && node.right==null){
-	       //ignore leaf nodes
-	        return;
-	   }
-	   
-	   //add current node's data to ArrayList
-	   lm.add(node.data);
-	   if(node.left!=null){
-	       //if left node exists then go to left node
-	       rootToLeftMost(node.left, lm);
-	   }else{
-	       //if left node doesn't exist only then go to right node
-	       rootToLeftMost(node.right, lm);
-	   }
-	   
-	   return;
-	}
-	
-	void allLeafs(Node node, ArrayList<Integer> leaf){
-	    if(node == null) return;//no node exists
+	    if(node == null) return ans;
 	    
-	    if(node.left==null && node.right == null){
-	        //if it is a leaf node then add its data to arraylist
-	        leaf.add(node.data);
+	    ans.add(node.data);
+	    if(node.left == null && node.right == null) return ans;
+	    
+	    ArrayList<Integer> leftMost = new ArrayList<>();
+	    left(node.left, leftMost);
+	    
+	    ArrayList<Integer> rightMost = new ArrayList<>();
+	    right(node.right, rightMost);
+	    
+	    
+	    ArrayList<Integer> leaves = new ArrayList<>();
+	    leaf(node, leaves);
+	    
+	    leftMost.addAll(leaves);
+	    leftMost.addAll(rightMost);
+	    ans.addAll(leftMost);
+	    
+	    return ans;
+	}
+	
+	void left(Node node, ArrayList<Integer> leftMost) {
+	    if(node == null) return;
+	    
+	    if(node.left == null && node.right == null) {
 	        return;
 	    }
 	    
-	    //if node is not leaf
-	    allLeafs(node.left, leaf);//check its left child
-	    allLeafs(node.right, leaf);//check its right child
+	    leftMost.add(node.data);
 	    
-	    return;
+	    if(node.left!=null) {
+	        left(node.left, leftMost);
+	    }else {
+	        left(node.right, leftMost);
+	    }
 	}
 	
-	void rightMostToRoot(Node node, ArrayList<Integer> rm){
-	    if(node == null){
-	        return;//no node exists, do nothing
-	    }
+	void right(Node node, ArrayList<Integer> rightMost) {
+	    if(node == null) return;
 	    
-	    if(node.left == null && node.right == null){
-	        //ignore leaf nodes
+	    if(node.left == null && node.right == null) {
 	        return;
 	    }
 	    
-	    if(node.right!=null){
-	       // if right child exists then go to right 
-	        rightMostToRoot(node.right, rm);
-	    }else{
-	        // if right child doesn't exist only then go to left 
-	        rightMostToRoot(node.left, rm);
+	    if(node.right!=null) {
+	        right(node.right, rightMost);
+	    }else {
+	        right(node.left, rightMost);
 	    }
-	    //adding to arraylist happens in postorder because we need to add right boundary in reverse
-	    rm.add(node.data);//add curr node's data to arraylist
 	    
-	    return;
+	    rightMost.add(node.data);
 	}
 	
+	void leaf(Node node, ArrayList<Integer> leaves) {
+	    if(node == null) return;
+	    
+	    if(node.left == null && node.right == null) {
+	        leaves.add(node.data);
+	        return;
+	    }
+	    
+	    leaf(node.left, leaves);
+	    leaf(node.right, leaves);
+	}
 }
