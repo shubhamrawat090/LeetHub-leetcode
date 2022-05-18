@@ -121,26 +121,45 @@ class Node{
         right=null;
     }
 }*/
-class Tree
-{
-     public ArrayList<Integer> diagonal(Node root)
-      {
-           //add your code here.
-           ArrayList<Integer> ans = new ArrayList<>();
-           Queue<Node> q = new ArrayDeque<>();
-           q.add(root);
-           while(!q.isEmpty()){
-               Node node = q.remove();
-               
-               while(node!=null){
-                   ans.add(node.data);
-                   if(node.left!=null) {
-                       q.add(node.left);
-                   }
-                   node = node.right;
-               }
-               
-           }
-           return ans;
-      }
+class Tree {
+    //max diagonal
+    static int md = 0;
+    //traversal on the current tree and storing info on HashMap
+    static void traversal(Node root, int diag, HashMap<Integer, ArrayList<Integer>> map) {
+        if(root == null) {
+            return;
+        }
+
+        md = Math.max(md, diag);
+
+        //store info on map(diagonal -> node's on that diagonal)
+        if(map.containsKey(diag) == false) {
+            map.put(diag, new ArrayList<>());
+            map.get(diag).add(root.data);
+        } else {
+            map.get(diag).add(root.data);
+        }
+
+        //on right side same diagonal
+        //on left size, diagonal + 1
+        traversal(root.left, diag + 1, map);
+        traversal(root.right, diag, map);
+    }
+     
+    public ArrayList<Integer> diagonal(Node root) {
+        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+        traversal(root, 0, map);
+ 
+        //traverse the map(0-> maxDiagonal) and add the values according to the diagonal
+        ArrayList<Integer> total = new ArrayList<>();
+        for(int d = 0; d <= md; d++) {
+            ArrayList<Integer> list = map.get(d);
+            if(list == null) continue;
+            for(int item: list) {
+                total.add(item);
+            }
+        }
+
+        return total;
+    }
 }
