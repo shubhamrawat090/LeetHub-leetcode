@@ -14,66 +14,56 @@
  * }
  */
 class Solution {
-    public void recoverTree(TreeNode root) {
+    public void recoverTree(TreeNode curr) {
+        if(curr == null)
+            return;
         
-        /// USING MORRIS INORDER TRAVERSAL
+        TreeNode prev=null, first=null, second=null;
         
-        if(root == null) return;
-        
-        TreeNode prev = null;
-        TreeNode first = null;
-        TreeNode second = null;
-        
-        while(root!=null){
-            if(root.left == null){
-                // PROCESSING NODE
-                if(prev!=null && prev.val>root.val){
-                    //first not found
-                    if(first==null){
+        //work till curr exists
+        while(curr != null) {
+            //if left child doesn't exist
+            if(curr.left==null) {
+                if(prev != null && prev.val>curr.val) {
+                    if(first == null){
                         first = prev;
                     }
-                    
-                    second = root;
+                    second = curr;
                 }
-                
-                prev = root;
-                
-                root = root.right;
-            }else{
-                //get a ptr to right most of left node
-                TreeNode temp = root.left;
-                while(temp.right != null && temp.right != root){
-                    temp = temp.right;
+                //print curr and go to right
+                prev = curr;
+                curr = curr.right;
+            } 
+            //if left child exists
+            else {
+                TreeNode iop = curr.left;
+                while(iop.right!=null && iop.right!=curr) {
+                    iop = iop.right;
                 }
-                
-                //join temp to root to create threaded binary tree
-                if(temp.right == null){
-                    temp.right = root;
-                    root = root.left;
-                }else{
-                    temp.right = null;
-                    
-                    // PROCESSING NODE
-                    if(prev!=null && prev.val>root.val){
-                        //first not found
-                        if(first==null){
+                //left is unprocessed
+                if(iop.right == null) {
+                    //make thread and go to left
+                    iop.right = curr;
+                    curr = curr.left;
+                } 
+                //left is processed
+                else {
+                    if(prev != null && prev.val>curr.val) {
+                        if(first == null){
                             first = prev;
                         }
-
-                        second = root;
+                        second = curr;
                     }
-
-                    prev = root;
-                    
-                    root = root.right;
+                    //break thread, print and go to right
+                    iop.right = null;
+                    prev = curr;
+                    curr = curr.right;
                 }
             }
         }
         
-        //Swap first and second ptr values
         int temp = first.val;
         first.val = second.val;
         second.val = temp;
-        
     }
 }
