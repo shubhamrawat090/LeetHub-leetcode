@@ -37,14 +37,14 @@ class Solution {
                 }
                 //left is unprocessed
                 if(iop.right == null) {
+                    //print, make thread and go to left
                     ans.add(curr.val);
-                    //make thread and go to left
                     iop.right = curr;
                     curr = curr.left;
                 } 
                 //left is processed
                 else {
-                    //break thread, print and go to right
+                    //break thread and go to right
                     iop.right = null;
                     curr = curr.right;
                 }
