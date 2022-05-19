@@ -49,15 +49,18 @@ class Solution {
         
         int maxPath = 0;
             
+        //call for all 4 directions
         for(int[] d: dir) {
             int newRow = r + d[0];
             int newCol = c + d[1];
             
+            //if newRow, newCol is inside bounds of matrix and curr val < new val, then you can go
             if(newRow>=0 && newRow<m && newCol>=0 && newCol<n && matrix[r][c]<matrix[newRow][newCol]) {
                 maxPath = Math.max(maxPath, memo(matrix, m, n, newRow, newCol, dp));
             }
         }
         
+        //add current block(1) to it
         return dp[r][c] = maxPath+1;
     }
     
