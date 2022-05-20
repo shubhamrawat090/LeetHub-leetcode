@@ -125,56 +125,31 @@ class Node{
 class Solution
 {
     // returns the inorder successor of the Node x in BST (rooted at 'root')
-	public Node inorderSuccessor(Node curr,Node x)
-         {
-          //add code here.
-          if(curr == null)
-            return null;
-        
-            Node succ = null;
-            boolean found = false;
-            
-            //work till curr exists
-            while(curr != null) {
-                //if left child doesn't exist
-                if(curr.left==null) {
-                    
-                    //print curr and go to right
-                    if(found == true) {
-                        return curr;
-                    }
-                    if(curr == x) {
-                        found = true;
-                    }
-                    curr = curr.right;
-                } 
-                //if left child exists
-                else {
-                    Node iop = curr.left;
-                    while(iop.right!=null && iop.right!=curr) {
-                        iop = iop.right;
-                    }
-                    //left is unprocessed
-                    if(iop.right == null) {
-                        //make thread and go to left
-                        iop.right = curr;
-                        curr = curr.left;
-                    } 
-                    //left is processed
-                    else {
-                        //break thread, print and go to right
-                        if(found == true) {
-                            return curr;
-                        }
-                        if(curr == x) {
-                            found = true;
-                        }
-                        iop.right = null;
-                        curr = curr.right;
-                    }
-                }
-            }
-            
-            return succ;
-         }
+	public Node inorderSuccessor(Node curr,Node x) {
+	    if(curr == null) return null;
+	    
+	    //if right side exist then inOrder successor is on the right side
+	    if(x.right != null) {
+	       //right ka leftmost
+	       Node inOrdSuccessor = x.right;
+	       while(inOrdSuccessor.left != null) {
+	           inOrdSuccessor = inOrdSuccessor.left;
+	       }
+	       return inOrdSuccessor;
+	    } 
+	    //otherwise it exists on top
+	    else {
+	        Node inOrdSuccessor = null;
+	        while(curr != x) {
+	            if(curr.data > x.data) {
+	                inOrdSuccessor = curr;
+	                curr = curr.left;
+	            } else {
+	                curr = curr.right;
+	            }
+	        }
+	        
+	        return inOrdSuccessor;
+	    }
+	}
 }
