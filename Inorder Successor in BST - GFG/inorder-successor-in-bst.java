@@ -124,6 +124,7 @@ class Node{
 */
 class Solution
 {
+    // TIME: O(logN), Space: O(N)
     // returns the inorder successor of the Node x in BST (rooted at 'root')
 	public Node inorderSuccessor(Node curr,Node x) {
 	    if(curr == null) return null;
@@ -139,6 +140,7 @@ class Solution
 	    } 
 	    //otherwise it exists on top
 	    else {
+	        //find the last node where you took left turn from
 	        Node inOrdSuccessor = null;
 	        while(curr != x) {
 	            if(curr.data > x.data) {
