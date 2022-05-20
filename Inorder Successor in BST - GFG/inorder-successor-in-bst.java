@@ -124,34 +124,51 @@ class Node{
 */
 class Solution
 {
-    // TIME: O(logN), Space: O(N)
     // returns the inorder successor of the Node x in BST (rooted at 'root')
-	public Node inorderSuccessor(Node curr,Node x) {
-	    if(curr == null) return null;
+	public Node inorderSuccessor(Node root,Node x) {
+	    if(root == null) return null;
+	    boolean found = false;
 	    
-	    //if right side exist then inOrder successor is on the right side
-	    if(x.right != null) {
-	       //right ka leftmost
-	       Node inOrdSuccessor = x.right;
-	       while(inOrdSuccessor.left != null) {
-	           inOrdSuccessor = inOrdSuccessor.left;
-	       }
-	       return inOrdSuccessor;
-	    } 
-	    //otherwise it exists on top
-	    else {
-	        //find the last node where you took left turn from
-	        Node inOrdSuccessor = null;
-	        while(curr != x) {
-	            if(curr.data > x.data) {
-	                inOrdSuccessor = curr;
-	                curr = curr.left;
-	            } else {
-	                curr = curr.right;
+	    while(root != null) {
+	        if(root.left == null) {
+	            //print
+	            if(found == true) {
+	                return root;
+	            }
+	            if(root == x) {
+	                found = true;
+	            }
+	            //go to right
+	            root = root.right;
+	        } else {
+	            //inorder predecessor -> left ka rightmost
+	            Node iop = root.left;
+	            while(iop.right != null && iop.right != root) {
+	                iop = iop.right;
+	            }
+	            
+	            //left side is not processed
+	            if(iop.right == null) {
+	                iop.right = root; //make thread
+	                //go to left
+	                root = root.left;
+	            } 
+	            //left side is processed
+	            else {
+	                iop.right = null; //break thread
+	                //print
+	                if(found == true) {
+    	                return root;
+    	            }
+    	            if(root == x) {
+    	                found = true;
+    	            }
+	                //go to right
+	                root = root.right;
 	            }
 	        }
-	        
-	        return inOrdSuccessor;
 	    }
+	    
+	    return null;
 	}
 }
