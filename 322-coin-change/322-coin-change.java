@@ -7,8 +7,9 @@ class Solution {
         return minCoins!=Integer.MAX_VALUE? minCoins: -1;
     }
     
+    //memoized
     private int memo(int n, int[] coins, int amount, int[] dp) {
-        if(amount == 0) return 0;
+        if(amount == 0) return dp[amount] = 0;
         
         int ans = Integer.MAX_VALUE;
         
