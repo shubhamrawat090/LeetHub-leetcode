@@ -1,3 +1,4 @@
+// Brute Force: Time O(N^3), Space O(1)
 class Solution {
     public int countSubstrings(String s) {
         int count=0;
