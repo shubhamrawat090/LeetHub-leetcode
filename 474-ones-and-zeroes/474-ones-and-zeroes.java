@@ -23,16 +23,16 @@ class Solution {
                        continue;
                    }
                    
-                   //Not Adding
-                   int dontAdd = dp[m][n][index - 1]; 
+                   //exclude idx-1
+                   int exc = dp[m][n][index - 1]; 
 
-                   //Adding
+                   //include idx-1
                    int[] count = getCount(strs[index - 1]);
-                   int add = 0;
+                   int inc = 0;
                    if (count[0] <= m && count[1] <= n) 
-                       add = 1 + dp[m - count[0]][n - count[1]][index - 1];
+                       inc = 1 + dp[m - count[0]][n - count[1]][index - 1];
                    
-                    dp[m][n][index] = Math.max(dontAdd, add);
+                    dp[m][n][index] = Math.max(exc, inc);
                }
            }
        }
