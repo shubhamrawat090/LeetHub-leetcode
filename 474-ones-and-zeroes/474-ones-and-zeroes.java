@@ -1,14 +1,42 @@
 class Solution {
     public int findMaxForm(String[] strs, int m, int n) {
         int[][][] dp = new int[m+1][n+1][strs.length+1];
-        for(int[][] row: dp) {
-            for(int[] col: row) {
-                Arrays.fill(col, -1);
-            }
-        }
+        // for(int[][] row: dp) {
+        //     for(int[] col: row) {
+        //         Arrays.fill(col, -1);
+        //     }
+        // }
         
-        int ans = memo(strs, m, n, 0, dp);
+        int ans = tabulation(strs, m, n, dp);
         return ans;
+    }
+    
+    //Tabulation
+    private int tabulation(String[] strs, int zeroes, int ones, int[][][] dp) {
+        int size = strs.length;
+        for(int index = 0; index <= size; index++){
+           for(int m = 0; m <= zeroes; m++){
+               for(int n = 0; n <= ones; n++){
+                   //BASE CASE
+                   if(index == 0) {
+                       dp[m][n][index] = 0;
+                       continue;
+                   }
+                   
+                   //Not Adding
+                   int dontAdd = dp[m][n][index - 1]; 
+
+                   //Adding
+                   int[] count = getCount(strs[index - 1]);
+                   int add = 0;
+                   if (count[0] <= m && count[1] <= n) 
+                       add = 1 + dp[m - count[0]][n - count[1]][index - 1];
+                   
+                    dp[m][n][index] = Math.max(dontAdd, add);
+               }
+           }
+       }
+       return dp[zeroes][ones][size];
     }
     
     //Memoized
