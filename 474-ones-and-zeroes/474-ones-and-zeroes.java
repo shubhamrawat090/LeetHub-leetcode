@@ -3,8 +3,10 @@ class Solution {
         int[][] dp = new int[m+1][n+1];
         int ones=0;
         int zeros=0;
-        for(String s:strs){
-            int[] count = count01(s);
+        int[] count = new int[2];
+        for(String str: strs){
+            //get zeroes and ones count
+            count = count01(str);
             zeros = count[0];
             ones = count[1];
             for(int i=m;i>=zeros;i--){
