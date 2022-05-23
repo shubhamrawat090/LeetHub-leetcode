@@ -32,7 +32,7 @@ class Solution {
         }
         
         if(leftLv == rightLv) 
-            return (int)Math.pow(2, leftLv) - 1;
+            return (1<<leftLv) - 1;
         else 
             return 1 + countNodes(root.left) + countNodes(root.right);
     }
