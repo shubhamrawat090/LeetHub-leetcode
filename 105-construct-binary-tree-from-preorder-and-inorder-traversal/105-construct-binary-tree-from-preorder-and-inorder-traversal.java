@@ -26,7 +26,7 @@ class Solution {
     
     private TreeNode construct(int pre_lo, int pre_hi, int in_lo, int in_hi, int[] pre, HashMap<Integer, Integer> inordMap) {
         //base case
-        if(pre_lo > pre_hi || in_lo > in_hi) {
+        if(pre_lo > pre_hi) {
             return null;
         }
         
