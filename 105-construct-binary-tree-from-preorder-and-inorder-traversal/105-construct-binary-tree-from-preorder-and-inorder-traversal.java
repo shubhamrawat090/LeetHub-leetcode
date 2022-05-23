@@ -34,7 +34,7 @@ class Solution {
         
         node.val = pre[pre_lo];
         
-        int idx = inordMap.getOrDefault(pre[pre_lo], 0);
+        int idx = inordMap.get(pre[pre_lo]);
         
         int lhs = idx - in_lo;
         
