@@ -6,7 +6,7 @@ class Solution {
         int[] count = new int[2];
         for(String str: strs){
             //get zeroes and ones count
-            count = count01(str);
+            count01(str, count);
             zeros = count[0];
             ones = count[1];
             for(int i=m;i>=zeros;i--){
@@ -20,7 +20,7 @@ class Solution {
         
     }
     
-    public int[] count01(String s) {
+    public void count01(String s, int[] count) {
         int z = 0, o = 0;
             for (char ch : s.toCharArray()) {
                 if (ch == '1')
@@ -28,7 +28,8 @@ class Solution {
                 else
                     z++;
         }
-        return new int[]{z, o};
+        count[0] = z;
+        count[1] = o;
     } 
     
 }
