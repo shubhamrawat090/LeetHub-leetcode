@@ -116,11 +116,17 @@ class Solution
     {
         if(root == null) return 0;
         
-        int maxFromLeft = maxPathSum(root.left);
-        int maxFromRight = maxPathSum(root.right);
-        
-        int currMaxSum = Math.max(maxFromLeft, maxFromRight) + root.data;
-        
-        return currMaxSum;
+        if(root.left!=null && root.right!=null) {
+            int left = maxPathSum(root.left);
+            int right = maxPathSum(root.right);
+
+            return Math.max(left, right) + root.data;
+        } else if(root.left!=null) {
+            return maxPathSum(root.left) + root.data;
+        } else if(root.right!=null) {
+            return maxPathSum(root.right) + root.data;
+        } else{
+            return root.data;
+        }
     }
 }
