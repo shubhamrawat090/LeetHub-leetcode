@@ -9,8 +9,8 @@ class Solution {
         
         for(int i=0;i<dp.length;i++){
             
-            //find the index of heioght of envelope[i]
-            int index = binarySearch ( dp, 0, maxlen, envelopes[i][1]);
+            //find the index of height of envelope[i]
+            int index = binarySearch (dp, 0, maxlen, envelopes[i][1]);
             
             dp[index] = envelopes[i][1];
             
@@ -23,20 +23,12 @@ class Solution {
     }
     
     int binarySearch(int[] arr , int start, int end, int target){
-        while(start<end){
-            int mid= start + (end - start)/2;
-            
-            if(arr[mid]==target){
-                return mid;
-            }
-            
-            else if(arr[mid]>target){
-                end = mid;
-            }
-            else{
-                start = mid +1 ;
-            }
+        //returns -ve if element is not present
+        int index = Arrays.binarySearch(arr,start,end,target);
+        //we convert -ve to +ve to get the nearest greater element
+        if(index<0){
+            index = -(index+1);
         }
-        return start;
+        return index;
     }
 }
