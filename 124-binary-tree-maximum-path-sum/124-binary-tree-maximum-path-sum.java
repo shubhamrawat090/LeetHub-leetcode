@@ -15,7 +15,7 @@
  */
 class Solution {
     //global variable that holds our ans
-    static int maxPathSum;
+    int maxPathSum;
     //helper function which checks at every root for maxPathSum and stores max of all values in global var
     public int pathSum(TreeNode root) {
         //if no nodes then 0 is our ans
