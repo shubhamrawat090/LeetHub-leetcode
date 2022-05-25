@@ -1,3 +1,5 @@
+//Using Binary Search 
+// O(NlogN) time, O(N) space
 class Solution {
     public int maxEnvelopes(int[][] envelopes) {
         Arrays.sort(envelopes,(a,b) -> a[0]==b[0]?b[1]-a[1]:a[0]-b[0]);
