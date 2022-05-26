@@ -20,7 +20,7 @@ class Solution {
         
         boolean left = isValidBST(root.left);
         
-        if(prev!= null && prev>=root.val) {
+        if(prev!=null && prev>=root.val) {
             return false;
         }
         prev = root.val;
