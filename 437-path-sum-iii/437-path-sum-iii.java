@@ -14,31 +14,38 @@
  * }
  */
 class Solution {
-    int count = 0;
     public int pathSum(TreeNode root, int targetSum) {
-        dfs(root, targetSum);
+        int count = dfs(root, targetSum);
         return count;
     }
     
-    public void dfs(TreeNode root, int targetSum) {
-        if(root == null) return;
+    //consider each node as root and run helper function for it
+    public int dfs(TreeNode root, int targetSum) {
+        if(root == null) return 0;
         
-        helper(root, targetSum, 0);
+        int count = 0;
+        count += helper(root, targetSum, 0);
         
-        dfs(root.left, targetSum);
-        dfs(root.right, targetSum);
+        count += dfs(root.left, targetSum);
+        count += dfs(root.right, targetSum);
+        
+        return count;
     }
     
-    private void helper(TreeNode root, int targetSum, int sum) {
-        if(root == null) return;
+    //traverse the tree if at any pt. the sum = target then count it
+    private int helper(TreeNode root, int targetSum, int sum) {
+        if(root == null) return 0;
         
+        int count = 0;
         sum += root.val;
         
         if(targetSum == sum) {
             count++;
         }
         
-        helper(root.left, targetSum, sum);
-        helper(root.right, targetSum, sum);
+        count += helper(root.left, targetSum, sum);
+        count += helper(root.right, targetSum, sum);
+        
+        return count;
     }
 }
