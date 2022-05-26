@@ -23,31 +23,24 @@ class Node {
 
 class Solution {
     public Node connect(Node root) {
-        //for leaf nodes and nodes that don't exist
-        if(root == null || (root.left == null && root.right == null)) {
-            return root;
+        Node p1=root;
+        
+        while(p1!=null) {
+            Node p2=p1;
+            
+            while(p2!=null) {
+                if(p2.left!=null) {
+                    p2.left.next = p2.right;
+                }
+                if(p2.right!=null && p2.next!=null) {
+                    p2.right.next = p2.next.left;
+                }
+                p2 = p2.next;
+            }
+            
+            p1=p1.left;
         }
         
-        //if both sides exists
-        if(root.left!=null && root.right!=null) {
-            root.left.next = root.right;
-        }
-        
-        //if right child exists
-        if(root.right!=null) {
-            //if root.next has a node connected to it, join right's next to root.next's left
-            if(root.next!=null)
-                root.right.next = root.next.left;
-            //otherwise leave it null
-            else 
-                root.right.next = null;
-        }
-        
-        //go to left and right children and do the same
-        connect(root.left);
-        connect(root.right);
-        
-        //return our root
         return root;
     }
 }
