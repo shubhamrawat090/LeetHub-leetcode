@@ -121,31 +121,42 @@ class Solution
     int maxPathSum(Node root)
     { 
         // code here 
+        //if both sides exist then find max while considering leafs on both sides
         if(root.left!=null && root.right!=null) {
             maxPathSum_Root2Leaf(root);
             return max;
-        } else {
+        } 
+        //only 1 side exists then consider root as leaf(according to GFG definition)
+        else {
             int val = maxPathSum_Root2Leaf(root);
             return Math.max(max, val);
         }
     } 
     
+    //return root to leaf sum and compares left+root+leaf for max Leaf to leaf node path
     public int maxPathSum_Root2Leaf(Node root) {
         if(root == null) return 0;
         
+        //if both sides exists then get both sides root-leaf sum
+        //COMPARE for max leaf-leaf path only if both sides exists
         if(root.left!=null && root.right!=null) {
             int left = maxPathSum_Root2Leaf(root.left);
             int right = maxPathSum_Root2Leaf(root.right);
             
             max = Math.max(max, left+root.data+right);
             return Math.max(left, right) + root.data;
-        } else if(root.left!=null) {
+        } 
+        //if only 1 side exists then just return root-leaf path
+        //DON'T consider in leaf-leaf path
+        else if(root.left!=null) {
             int left = maxPathSum_Root2Leaf(root.left);
             return left + root.data;
         } else if(root.right!=null) {
             int right = maxPathSum_Root2Leaf(root.right);
             return right + root.data;
-        } else {
+        } 
+        //if only root exists then just return its value
+        else {
             return root.data;
         }
     }
