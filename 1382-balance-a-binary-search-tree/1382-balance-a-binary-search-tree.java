@@ -18,8 +18,10 @@ class Solution {
         if(root == null || (root.left==null && root.right==null)) {
             return root;
         }
+        //store values in arraylist - inorder - increasing order
         ArrayList<Integer> values = new ArrayList<>();
         traverse(root, values);
+        //construct a balanced tree with those values
         return construct(0, values.size()-1, values);
     }
     
