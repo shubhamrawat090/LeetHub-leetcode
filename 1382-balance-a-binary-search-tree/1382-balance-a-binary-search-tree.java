@@ -26,14 +26,18 @@ class Solution {
     private TreeNode construct(int start, int end, ArrayList<Integer> values) {
         if(start > end) return null;
         
+        //mid as root
         int mid = start+(end-start)/2;
         TreeNode root = new TreeNode(values.get(mid));
+        //start to mid-1 is left subtree
         root.left = construct(start, mid-1, values);
+        //mid+1 to end is left subtree
         root.right = construct(mid+1, end, values);
         
         return root;
     }
     
+    //morris traversal - inorder
     private void traverse(TreeNode root, ArrayList<Integer> values) {
         
         while(root != null) {
