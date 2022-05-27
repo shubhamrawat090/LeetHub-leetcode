@@ -14,19 +14,43 @@
  * }
  */
 class Solution {
-    Integer prev = null;
     public boolean isValidBST(TreeNode root) {
-        if(root == null) return true;
+        Integer prev = null;
         
-        boolean left = isValidBST(root.left);
-        
-        if(prev!=null && prev>=root.val) {
-            return false;
+        while(root!=null) {
+            if(root.left==null) {
+                //print
+                if(prev!=null && prev>=root.val) {
+                    return false;
+                }
+                prev=root.val;
+                //go to right
+                root=root.right;
+            } else {
+                //find inorder predecessor
+                TreeNode iop = root.left;
+                while(iop.right!=null && iop.right!=root) {
+                    iop=iop.right;
+                }
+                //if left is unprocessed
+                if(iop.right==null) {
+                    //make thread
+                    iop.right=root;
+                    root=root.left;//go to left
+                } else {
+                    //break thread
+                    iop.right=null;
+                    //print
+                    if(prev!=null && prev>=root.val) {
+                        return false;
+                    }
+                    prev=root.val;
+                    //go to right
+                    root=root.right;
+                }
+            }
         }
-        prev = root.val;
         
-        boolean right = isValidBST(root.right);
-        
-        return (left && right);
+        return true;
     }
 }
