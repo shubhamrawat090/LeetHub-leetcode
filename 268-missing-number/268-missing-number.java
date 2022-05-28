@@ -1,4 +1,5 @@
 class Solution {
+    // formula sum - sum of val in array = missing number
     public int missingNumber(int[] nums) {
         int sum = 0;
         for(int num: nums) {
