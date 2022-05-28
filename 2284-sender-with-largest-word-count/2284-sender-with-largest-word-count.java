@@ -5,11 +5,16 @@ class Solution {
         
         int n = messages.length;
         
+        //store name -> word count
         for(int i=0; i<n; i++) {
             String sender = senders[i];
             String message = messages[i];
             
-            int words = message.split(" ").length;
+            // int words = message.split(" ").length;
+            int words = 1;
+            for(char c: message.toCharArray()) {
+                if(c==' ') words++;
+            }
             
             if(!map.containsKey(sender)) {
                 map.put(sender, words);
