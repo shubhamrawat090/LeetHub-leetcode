@@ -10,6 +10,7 @@ class Solution {
             String sender = senders[i];
             String message = messages[i];
             
+            //count no. of words
             // int words = message.split(" ").length;
             int words = 1;
             for(char c: message.toCharArray()) {
@@ -22,9 +23,9 @@ class Solution {
                 map.put(sender, map.get(sender)+words);
             }
         }
-        ArrayList<String> names = new ArrayList();
+        
+        //get highest word count
         int max = 0;
-        String ans = "";
         for(String key: map.keySet()) {
             int val = map.get(key);
             if(val>max) {
@@ -32,6 +33,8 @@ class Solution {
             }
         }
         
+        //Store the names with same max word count 
+        ArrayList<String> names = new ArrayList();
         for(String key: map.keySet()) {
             int val = map.get(key);
             if(val == max) {
@@ -39,8 +42,8 @@ class Solution {
             }
         }
         
+        //sort the array to get lexicographically highest
         Collections.sort(names);
-        ans = names.get(names.size()-1);
-        return ans;
+        return names.get(names.size()-1);
     }
 }
