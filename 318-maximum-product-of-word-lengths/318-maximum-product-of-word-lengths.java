@@ -1,3 +1,6 @@
+// Bit Manipulation Approach 
+// Time: O(N*N), Space: O(N)
+
 class Solution {
     //integer bits allow us to store till 32 bits and english letters are only 26, so it will accomodate it easily
     // a = 0th bit, b = 1st bit, c = 2nd bit, ....... z = 25th bit
