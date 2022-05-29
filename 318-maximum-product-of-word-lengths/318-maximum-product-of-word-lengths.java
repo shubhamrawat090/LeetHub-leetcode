@@ -30,8 +30,9 @@ class Solution {
     private int getState(String word) {
         int state = 0;
         
-        for(char c: word.toCharArray()) {
+        for(int i=0; i<word.length(); i++) {
             //take 1 char
+            char c = word.charAt(i);
             //left shift till that chars position
             int currCharPosition = 1<<(c-'a');
             //OR it with previous chars state
