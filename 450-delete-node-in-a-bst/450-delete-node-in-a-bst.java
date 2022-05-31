@@ -14,9 +14,9 @@
  * }
  */
 class Solution {
-    private int max(TreeNode root){
-        if(root.right!=null){
-            return max(root.right);
+    private int min(TreeNode root){
+        if(root.left!=null){
+            return min(root.left);
         }else{
             return root.val;
         }
@@ -46,9 +46,9 @@ class Solution {
             
             //case 3: two children
             else{
-                int justSmaller = max(root.left);
-                root.val = justSmaller;
-                root.left = deleteNode(root.left, justSmaller);
+                int minRight = min(root.right);
+                root.val = minRight;
+                root.right = deleteNode(root.right, minRight);
             }
         }
         
