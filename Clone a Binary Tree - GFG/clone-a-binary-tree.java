@@ -130,7 +130,7 @@ class Tree{
 	}
 }*/
 class Solution{
-    
+    //Using Hashmap
     public Tree cloneTree(Tree tree){
        // add code here.
        HashMap<Tree, Tree> map = new HashMap<>();
