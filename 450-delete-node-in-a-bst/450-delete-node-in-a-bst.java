@@ -52,8 +52,8 @@ class Solution {
     }
     
     private int getMin(TreeNode root) {
-        if(root.left!=null) {
-            return getMin(root.left);
+        while(root.left!=null) {
+            root = root.left;
         }
         
         return root.val;
