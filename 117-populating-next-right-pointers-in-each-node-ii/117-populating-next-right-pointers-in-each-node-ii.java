@@ -23,24 +23,39 @@ class Node {
 
 class Solution {
     public Node connect(Node root) {
-        if(root == null) return null;
-        Queue<Node> q = new ArrayDeque<>();
-        q.add(root);
+        Node curr = root;
+        Node head = null;
+        Node tail = null;
         
-        while(q.size()!=0) {
-            int size = q.size();
-            for(int i=0; i<size; i++) {
-                Node curr = q.remove();
-                if(i == size-1) {
-                    curr.next = null;
-                }else {
-                    curr.next = q.peek();
+        while(curr!=null) {
+            //curr on lv x and head,tail on lv x+1
+            while(curr!=null) {
+                if(curr.left!=null) {
+                    if(head == null) {
+                        head = curr.left;
+                        tail = curr.left;
+                    } else {
+                        tail.next = curr.left;
+                        tail = curr.left;
+                    }
                 }
-
-                if(curr.left!=null) q.add(curr.left);
-                if(curr.right!=null) q.add(curr.right);  
+                
+                if(curr.right!=null) {
+                    if(head == null) {
+                        head = curr.right;
+                        tail = curr.right;
+                    } else {
+                        tail.next = curr.right;
+                        tail = curr.right;
+                    }
+                }
+                
+                curr = curr.next;
             }
             
+            curr = head;
+            head = null;
+            tail = null;
         }
         
         return root;
