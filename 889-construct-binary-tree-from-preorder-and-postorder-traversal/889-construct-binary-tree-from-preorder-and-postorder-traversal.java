@@ -14,6 +14,7 @@
  * }
  */
 class Solution {
+    // POSSIBLE ONLY FOR FULL BINARY TREE(0 or 2 children for each node)
     public TreeNode constructFromPrePost(int[] preorder, int[] postorder) {
         //map to search in postorder
         HashMap<Integer, Integer> map = new HashMap<>();
