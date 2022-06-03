@@ -91,6 +91,8 @@ class GfG
             return null;
         }
         
+        //search in level order,
+        //whichever value in inorder is having least idx in levelorder is root
         int minIdx = inLo;
         for(int i=inLo+1; i<=inHi; i++) {
             if(map.get(in[minIdx]) > map.get(in[i])) {
@@ -98,6 +100,7 @@ class GfG
             } 
         }
         
+        //in inorder minIdx is root, inLo to minIdx-1 => left subtree and minIdx+1 to inHi => right subtree
         Node root = new Node(in[minIdx]);
         root.left = construct(in, map, inLo, minIdx-1);
         root.right = construct(in, map, minIdx+1, inHi);
