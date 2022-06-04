@@ -9,32 +9,6 @@ class Solution {
         return res;
     }
     
-    private boolean validate(char[][] board, int row, int col) {
-        int duprow = row;
-        int dupcol = col; 
-        while(row >= 0 && col >= 0) {
-            if(board[row][col] == 'Q') return false; 
-            row--;
-            col--; 
-        }
-        
-        row = duprow; 
-        col = dupcol; 
-        while(col >= 0) {
-            if(board[row][col] == 'Q') return false; 
-            col--; 
-        }
-        
-        row = duprow; 
-        col = dupcol; 
-        while(col >= 0 && row < board.length) {
-            if(board[row][col] == 'Q') return false; 
-            col--;
-            row++; 
-        }
-        return true; 
-    }
-    
     private void dfs(int col, char[][] board, List<List<String>> res) {
         if(col == board.length) {
             res.add(construct(board));
@@ -50,8 +24,35 @@ class Solution {
         }
     }
     
-    
-    
+    private boolean validate(char[][] board, int row, int col) {
+        int duprow = row;
+        int dupcol = col; 
+        //top-left diagonal
+        while(row >= 0 && col >= 0) {
+            if(board[row][col] == 'Q') return false; 
+            row--;
+            col--; 
+        }
+        
+        row = duprow; 
+        col = dupcol; 
+        //left
+        while(col >= 0) {
+            if(board[row][col] == 'Q') return false; 
+            col--; 
+        }
+        
+        row = duprow; 
+        col = dupcol; 
+        //bottom-left diagonal
+        while(col >= 0 && row < board.length) {
+            if(board[row][col] == 'Q') return false; 
+            col--;
+            row++; 
+        }
+        return true; 
+    }
+       
     private List<String> construct(char[][] board) {
         List<String> res = new LinkedList<String>();
         for(int i = 0; i < board.length; i++) {
