@@ -40,7 +40,7 @@ class Solution {
         
         path = Math.max(path, retPath);
         
-        if(root.left!=null && root.left.val == root.val && root.right!=null && root.right.val == root.val) {
+        if(root.left!=null && root.right!=null && root.left.val == root.val && root.right.val == root.val) {
             path = Math.max(path, left+right+2);
         }
         
