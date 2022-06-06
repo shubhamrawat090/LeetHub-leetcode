@@ -25,12 +25,12 @@ public class Solution {
             }
         }
         
-        while(headA!=null && headB!=null && headA != headB) {
+        while(headA != headB) {
             headA = headA.next;
             headB = headB.next;
         }
         
-        return headA==null || headB == null? null: headA;
+        return headA;
     }
     
     int size(ListNode head) {
