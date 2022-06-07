@@ -43,7 +43,10 @@ class Solution {
         TreeNode node = new TreeNode(val);
         
         node.left = helper(str, depth+1);
-        node.right = helper(str, depth+1);
+        //according to question if left is NOT NULL only then right child exists
+        if(node.left!=null) {
+            node.right = helper(str, depth+1);
+        }
         
         return node;
     }
