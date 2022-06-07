@@ -1,14 +1,13 @@
 class Solution {
-    
     class pair{
         TreeNode node;
         int count;
     }
     
-    int i  = 0;
+    int i = 0;
 
-    public pair dfs(String traversal , int level ){
-     int initial = i;
+    public pair dfs(String traversal, int level){
+        int initial = i;
 
         for( ; i < traversal.length(); i++)
            if(traversal.charAt(i) == '-')
