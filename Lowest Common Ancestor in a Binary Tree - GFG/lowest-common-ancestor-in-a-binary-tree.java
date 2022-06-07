@@ -120,20 +120,39 @@ class Node
 
 class Solution
 {
+    boolean f1 = false;
+    boolean f2 = false;
+    
     //Function to return the lowest common ancestor in a Binary Tree.
 	Node lca(Node root, int p,int q)
 	{
 		// Your code here
-		if(root == null) {
+		Node ans = helper(root, p, q);
+		
+		if(f1 == true && f2 == true) {
+		    return ans;
+		} else {
+		    return null;
+		}
+	}
+	
+	Node helper(Node root, int p, int q) {
+	    if(root == null) {
 		    return null;
 		}
 		
-		if(root.data == p || root.data == q) {
+		Node left = helper(root.left, p, q);
+		Node right = helper(root.right, p, q);
+		
+		if(root.data == p) {
+		    f1 = true;
 		    return root;
 		}
 		
-		Node left = lca(root.left, p, q);
-		Node right = lca(root.right, p, q);
+		if(root.data == q) {
+		    f2 = true;
+		    return root;
+		}
 		
 		if(left!=null && right!=null) {
 		    return root;
