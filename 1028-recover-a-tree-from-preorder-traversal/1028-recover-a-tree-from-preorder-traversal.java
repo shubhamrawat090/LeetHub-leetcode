@@ -1,53 +1,61 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
 class Solution {
-    int i=0;
-    public TreeNode recoverFromPreorder(String traversal) {
-        return helper(traversal, 0);
+    
+    class pair{
+        TreeNode node;
+        int count;
     }
     
-    private TreeNode helper(String str, int depth) {
-        int dash = 0;
-        
-        while(i+dash<str.length() && str.charAt(i+dash)=='-') {
-            dash++;
-        }
-        
-        if(dash!=depth) {
-            return null;
-        }
-        
-        int nonDash = 0;
-        
-        while(i+dash+nonDash<str.length() && str.charAt(i+dash+nonDash)!='-') {
-            nonDash++;
-        }
-        
-        int val = Integer.parseInt(str.substring(i+dash, i+dash+nonDash));
-        
-        i = i+dash+nonDash;
-        
-        TreeNode node = new TreeNode(val);
-        
-        node.left = helper(str, depth+1);
-        //according to question if left is NOT NULL only then right child exists
-        if(node.left!=null) {
-            node.right = helper(str, depth+1);
-        }
-        
-        return node;
+    int i  = 0;
+
+    public pair dfs(String traversal , int level ){
+     int initial = i;
+
+        for( ; i < traversal.length(); i++)
+           if(traversal.charAt(i) == '-')
+               break;
+
+        String s = traversal.substring(initial , i);
+        int val =  Integer.parseInt(s);
+
+
+        int count = 0;
+
+        for( ; i < traversal.length(); i++){
+
+            if(traversal.charAt(i) != '-')
+             break;
+
+            count++;
+           } 
+
+        pair p = new pair();
+        p.node = new TreeNode(val);
+
+        p.count = count;
+
+
+        if(p.count != level)
+          return p;
+
+        pair left = dfs(traversal , level + 1 );
+        p.node.left = left.node;
+        p.count = left.count;
+
+        if(left.count != level)
+            return p;
+
+
+        pair right = dfs(traversal , level+1 );
+        p.node.right = right.node;
+        p.count = right.count;
+
+        return p;
     }
+
+
+    public TreeNode recoverFromPreorder(String traversal) {
+        pair p = dfs(traversal, 1);
+        return p.node; 
+    }
+    
 }
