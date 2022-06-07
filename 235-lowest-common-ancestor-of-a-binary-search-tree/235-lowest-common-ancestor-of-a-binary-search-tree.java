@@ -10,18 +10,23 @@
 
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        //tree doesn't exist
-        if(root==null) 
+        if(root == null) {
             return null;
+        }
         
-        //both p and q exist on the right => their LCA will also exist on the right subtree
-        if(root.val<p.val && root.val<q.val) 
-            return lowestCommonAncestor(root.right,p,q);
-        //both p and q exist on the left => their LCA will also exist on the left subtree
-        else  if(root.val>p.val && root.val>q.val) 
-            return lowestCommonAncestor(root.left,p,q);
-        // either of p or q is root which means that is the LCA
-        // ROOT IS ALWAYS THE LCA
-        else return root;
+        if(p.val == root.val) {
+            return p;
+        }else if(q.val == root.val) {
+            return q;
+        }
+        
+        if(p.val<root.val && q.val<root.val) {
+            return lowestCommonAncestor(root.left, p, q);
+        } else if(p.val>root.val && q.val>root.val) {
+            return lowestCommonAncestor(root.right, p, q);
+        }
+        
+        //both paths split
+        return root;
     }
 }
