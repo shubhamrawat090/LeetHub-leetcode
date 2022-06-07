@@ -8,20 +8,39 @@
  * }
  */
 class Solution {
+    boolean f1 = false;
+    boolean f2 = false;
+    
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode ans = helper(root, p, q);
+        
+        if(f1 == true && f2 == true) {
+            return ans;
+        } else {
+            return null;
+        }
+    }
+    
+    private TreeNode helper(TreeNode root, TreeNode p, TreeNode q) {
         if(root == null){
             //no node exists
             return null;
         }
         
-        if(root == p || root == q){
-            //if root is one of the nodes to be found then root is LCA
+        //Get left and right's answers 
+        TreeNode leftAns = helper(root.left, p, q);
+        TreeNode rightAns = helper(root.right, p, q);
+        
+        //if root is one of the nodes to be found then root is LCA
+        if(root == p){
+            f1 = true;
             return root;
         }
         
-        //Get left and right's answers 
-        TreeNode leftAns = lowestCommonAncestor(root.left, p, q);
-        TreeNode rightAns = lowestCommonAncestor(root.right, p, q);
+        if(root == q){
+            f2 = true;
+            return root;
+        }
         
         if(leftAns!=null && rightAns!=null){
             //if left and right have p & q in them then root is LCA
