@@ -129,6 +129,7 @@ class Solution
 		// Your code here
 		Node ans = helper(root, p, q);
 		
+		//check if any 1 of the nodes doesn't exist
 		if(f1 == true && f2 == true) {
 		    return ans;
 		} else {
