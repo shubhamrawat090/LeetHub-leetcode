@@ -4,16 +4,8 @@ class Solution {
             return 0;
         }
         
-        StringBuilder reverse = new StringBuilder();
+        StringBuilder sb = new StringBuilder(s);
         
-        for(int i=s.length()-1; i>=0; i--) {
-            reverse.append(s.charAt(i));
-        }
-        
-        if(reverse.toString().equals(s)) {
-            return 1;
-        }
-        
-        return 2;
+        return sb.reverse().toString().equals(s)? 1: 2;
     }
 }
