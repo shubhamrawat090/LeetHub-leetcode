@@ -14,23 +14,23 @@
  * }
  */
 class Solution {
-    int sum = 0;
     public TreeNode convertBST(TreeNode root) {
-        reverseInorder(root);
+        dfs(root);
         return root;
     }
     
-    private void reverseInorder(TreeNode root) {
-        if(root == null) {
+    int sum=0;
+    
+    private void dfs(TreeNode root){
+        if(root==null) 
             return;
-        }
         
-        reverseInorder(root.right);
-        //work
-        sum += root.val;
+        dfs(root.right);
         
-        root.val = sum;
+        sum +=root.val;
+        root.val=sum;
         
-        reverseInorder(root.left);
+        dfs(root.left);
     }
 }
+
