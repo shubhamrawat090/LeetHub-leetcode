@@ -15,22 +15,20 @@
  */
 class Solution {
     public TreeNode convertBST(TreeNode root) {
-        dfs(root);
-        return root;
+        rec(root, 0);
+        return root ;
     }
     
-    int sum=0;
-    
-    private void dfs(TreeNode root){
-        if(root==null) 
-            return;
-        
-        dfs(root.right);
-        
-        sum +=root.val;
-        root.val=sum;
-        
-        dfs(root.left);
+    public int rec(TreeNode node , int prevSum){
+        //add the value of rightSubTree to node
+        //pass this as prevSum to add to leftSubTree
+        //return the value of leftSubTree
+        if(node == null)
+            return prevSum ;
+        int rightValue = rec(node.right, prevSum);
+        node.val += rightValue ;
+        int leftValue = rec(node.left, node.val);
+        return leftValue ;
     }
 }
 
