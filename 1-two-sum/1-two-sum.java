@@ -1,16 +1,22 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        // O(N*N) time O(1) space
-        int forwardCounter =1;
-        while(forwardCounter < nums.length)
-        {
-            for(int i=0 ; (i + forwardCounter) < nums.length; i++)
-            {
-                if((nums[i] + nums[(i+forwardCounter)]) == target)
-                    return new int[]{i,(i+forwardCounter)};
-            }
-            forwardCounter++;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        
+        int size = nums.length;
+        
+        for(int i=0; i<size; i++) {
+            map.put(nums[i], i);
         }
-      return null;  
+        
+        for(int i=0; i<size; i++) {
+            if(map.containsKey(target-nums[i])) {
+                if(map.get(target-nums[i])==i) {
+                    continue;
+                }
+                return new int[]{i, map.get(target-nums[i])};
+            }
+        }
+        
+        return null;
     }
 }
