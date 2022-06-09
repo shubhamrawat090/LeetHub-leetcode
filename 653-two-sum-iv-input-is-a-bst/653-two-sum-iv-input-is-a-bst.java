@@ -23,33 +23,35 @@ class Solution {
             return false;
         }
         
-        boolean left = helper(orig, node.left, target);
-        
         //curr node
-        if(target-node.val>node.val) {
-            if(search(orig, target-node.val)) {
-                return true;
-            }
+        boolean curr = false;
+        if(search(orig, node, target-node.val)) {
+            curr = true;
         }
         
+        boolean left = helper(orig, node.left, target); 
         boolean right = helper(orig, node.right, target);
         
-        return left || right;
+        return curr || left || right;
     }
     
-    private boolean search(TreeNode node, int val) {
+    private boolean search(TreeNode node, TreeNode curr, int val) {
         if(node == null) {
             return false;
         }
         
-        if(node.val == val) {
+        if(node == curr) {
+            return false;
+        }
+        
+        if(node.val == val && node!=curr) {
             return true;
         }
         
         if(val < node.val) {
-            return search(node.left, val);
+            return search(node.left, curr, val);
         } else {
-            return search(node.right, val);
+            return search(node.right, curr, val);
         }
     }
 }
