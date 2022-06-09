@@ -40,18 +40,16 @@ class Solution {
             return false;
         }
         
-        if(node == curr) {
-            return false;
-        }
-        
         if(node.val == val && node!=curr) {
             return true;
         }
         
         if(val < node.val) {
             return search(node.left, curr, val);
-        } else {
+        } else if(val > node.val) {
             return search(node.right, curr, val);
         }
+        
+        return node!=curr;
     }
 }
