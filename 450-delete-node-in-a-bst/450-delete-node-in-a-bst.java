@@ -26,24 +26,24 @@ class Solution {
         }
         
         if(root.val == key) {
-            //no child-> leaf node
-            if(root.left == null && root.right == null) {
-                return null;
-            }
-            
-            //1 child
-            if(root.left == null) {
-                return root.right;
-            }
-            else if(root.right == null) {
-                return root.left;
-            }
-            else {
+            if(root.left != null && root.right != null) {
                 //both children
                 //get right min
                 int min = getMin(root.right);
                 root.val = min;//set data
                 root.right = deleteNode(root.right, min);//delete that min node in right subtree
+            }
+            
+            //1 child
+            else if(root.right != null) {
+                return root.right;
+            }
+            else if(root.left != null) {
+                return root.left;
+            }
+            //no child-> leaf node
+            else {
+                return null;
             }
             
         }
