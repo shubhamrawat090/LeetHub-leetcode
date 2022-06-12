@@ -12,12 +12,12 @@ class Solution {
             } else {
                 //non unique
                 
-                //discard values before duplicate value
                 while(nums[first]!=nums[second]) {
                     visited[nums[first]] = false;//discard first value
                     sum -= nums[first];
                     first++;
                 }
+                
                 first++;
                 second++;
             }
