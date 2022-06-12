@@ -1,16 +1,17 @@
 class Solution {
     public int maximumUniqueSubarray(int[] nums) {
-        HashSet<Integer> set = new HashSet<>();
+        boolean[] visited = new boolean[10001];
         int first=0, second=0;
         int sum = 0, maxSum = 0;
         while(second<nums.length) {
-            if(set.add(nums[second])) {
+            if(!visited[nums[second]]) {
                 //unique element
+                visited[nums[second]] = true;
                 sum += nums[second];
                 second++;
             } else {
                 //non unique
-                set.remove(nums[first]);
+                visited[nums[first]] = false;
                 sum -= nums[first];
                 first++;
             }
