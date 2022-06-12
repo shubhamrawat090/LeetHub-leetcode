@@ -10,8 +10,10 @@ class Solution {
                 sum += nums[second];
                 second++;
             } else {
-                maxSum = Math.max(maxSum, sum);
+                // maxSum = Math.max(maxSum, sum);
                 //non unique
+                
+                //dirsc
                 while(nums[first]!=nums[second]) {
                     visited[nums[first]] = false;//discard first value
                     sum -= nums[first];
