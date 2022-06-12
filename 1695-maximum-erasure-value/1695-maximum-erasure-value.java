@@ -10,10 +10,15 @@ class Solution {
                 sum += nums[second];
                 second++;
             } else {
+                maxSum = Math.max(maxSum, sum);
                 //non unique
-                visited[nums[first]] = false;
-                sum -= nums[first];
+                while(nums[first]!=nums[second]) {
+                    visited[nums[first]] = false;//discard first value
+                    sum -= nums[first];
+                    first++;
+                }
                 first++;
+                second++;
             }
             
             maxSum = Math.max(maxSum, sum);
