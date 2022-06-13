@@ -14,16 +14,16 @@ class Solution {
         return ans;
     }
     
-    int[][] dir = {{0,-1}, {0,1}, {1,0}, {-1,0}};
     private void dfs(char[][] grid, int r, int c) {
-        grid[r][c] = '2';
-        for(int i=0; i<4; i++) {
-            int nr = r+dir[i][0];
-            int nc = c+dir[i][1];
-            
-            if(nr>=0 && nr<grid.length && nc>=0 && nc<grid[0].length && grid[nr][nc]=='1') {
-                dfs(grid, nr, nc);
-            }
+        if(r<0 || r>=grid.length || c<0 || c>=grid[0].length || grid[r][c]!='1') {
+            return;
         }
+
+        grid[r][c] = '2';
+        
+        dfs(grid, r+1, c);
+        dfs(grid, r-1, c);
+        dfs(grid, r, c+1);
+        dfs(grid, r, c-1);
     }
 }
