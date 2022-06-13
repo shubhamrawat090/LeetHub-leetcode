@@ -2,16 +2,34 @@ class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
         // return rec(triangle, 0, 0);
         int[][] dp = new int[200][200];
-        // for(int[] a: dp) {
-        //     Arrays.fill(a, -1);
-        // }
+//         for(int[] a: dp) {
+//             Arrays.fill(a, -1);
+//         }
         
-        // return memo(triangle, 0, 0, dp);
+//         return memo(triangle, 0, 0, dp);
         
+        // return tab(triangle);
         return tab(triangle, dp);
     }
     
     //TABULATION
+    private int tab(List<List<Integer>> triangle) {
+        int[][] dp = new int[triangle.size()][triangle.get(triangle.size()-1).size()];
+        for (int i = triangle.size()-1; i >= 0; --i) {
+            for (int j = 0; j < triangle.get(i).size(); ++j) {
+                int min = triangle.get(i).get(j);
+                //FOR LAST ROW CURR (i,j) val is the only answer
+                if (i < triangle.size() - 1)
+                    min += Math.min(dp[i+1][j], dp[i+1][j+1]);
+                
+                dp[i][j] = min;
+            }
+        }
+        
+        return dp[0][0];
+    }
+    
+    //TABULATION VERSION 2
     private int tab(List<List<Integer>> triangle, int[][] dp) {
         for(int r=triangle.size()-1; r>=0; r--) {
             for(int c=triangle.get(r).size()-1; c>=0; c--) {
@@ -35,7 +53,7 @@ class Solution {
     
     //MEMOIZED
     private int memo(List<List<Integer>> triangle, int r, int c, int[][] dp) {
-        if(r==triangle.size() || c==triangle.get(r).size()) {
+        if(r==triangle.size()) {
             return dp[r][c] = 0;
         }
         
@@ -54,7 +72,7 @@ class Solution {
     
     //RECURSIVE
     private int rec(List<List<Integer>> triangle, int r, int c) {
-        if(r==triangle.size() || c==triangle.get(r).size()) {
+        if(r==triangle.size()) {
             return 0;
         }
         
