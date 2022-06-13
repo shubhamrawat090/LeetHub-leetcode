@@ -1,26 +1,32 @@
 class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
         // return rec(triangle, 0, 0);
-        // int[][] dp = new int[200][200];
-//         for(int[] a: dp) {
-//             Arrays.fill(a, -1);
-//         }
+        int[][] dp = new int[200][200];
+        // for(int[] a: dp) {
+        //     Arrays.fill(a, -1);
+        // }
         
-//         return memo(triangle, 0, 0, dp);
+        // return memo(triangle, 0, 0, dp);
         
-        return tab(triangle);
+        return tab(triangle, dp);
     }
     
     //TABULATION
-    private int tab(List<List<Integer>> triangle) {
-        int[][] dp = new int[triangle.size()][triangle.get(triangle.size()-1).size()];
-        for (int i = triangle.size()-1; i >= 0; --i) {
-            for (int j = 0; j < triangle.get(i).size(); ++j) {
-                int min = triangle.get(i).get(j);
-                if (i < triangle.size() - 1)
-                    min += Math.min(dp[i+1][j], dp[i+1][j+1]);
-                
-                dp[i][j] = min;
+    private int tab(List<List<Integer>> triangle, int[][] dp) {
+        for(int r=triangle.size()-1; r>=0; r--) {
+            for(int c=triangle.get(r).size()-1; c>=0; c--) {
+                if(r==triangle.size()-1) {
+                    dp[r][c] = triangle.get(r).get(c);
+                    continue;
+                }
+
+                int same = triangle.get(r).get(c);
+                same += dp[r+1][c];
+
+                int next = triangle.get(r).get(c);
+                next += dp[r+1][c+1];
+
+                dp[r][c] = Math.min(same, next);
             }
         }
         
@@ -29,7 +35,7 @@ class Solution {
     
     //MEMOIZED
     private int memo(List<List<Integer>> triangle, int r, int c, int[][] dp) {
-        if(r==triangle.size()) {
+        if(r==triangle.size() || c==triangle.get(r).size()) {
             return dp[r][c] = 0;
         }
         
@@ -48,7 +54,7 @@ class Solution {
     
     //RECURSIVE
     private int rec(List<List<Integer>> triangle, int r, int c) {
-        if(r==triangle.size()) {
+        if(r==triangle.size() || c==triangle.get(r).size()) {
             return 0;
         }
         
