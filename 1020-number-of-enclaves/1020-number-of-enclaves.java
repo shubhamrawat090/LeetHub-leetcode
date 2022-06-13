@@ -6,21 +6,22 @@ class Solution {
         int m = grid[0].length;
         
         //find connected components of all boundaries and mark then -1
+        //top row
         for(int i=0,j=0;j<m;j++){
             if(grid[i][j]==1)
                 dfs(grid,i,j);
         }
-        
+        //bottom row
         for(int i=n-1,j=0;j<m;j++){
             if(grid[i][j]==1)
                 dfs(grid,i,j);
         }
-        
+        //left column 
         for(int i=0,j=0;i<n;i++){
             if(grid[i][j]==1)
                 dfs(grid,i,j);
         }
-        
+        //right column
         for(int i=0,j=m-1;i<n;i++){
             if(grid[i][j]==1)
                 dfs(grid,i,j);
