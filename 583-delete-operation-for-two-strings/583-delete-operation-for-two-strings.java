@@ -1,8 +1,10 @@
 class Solution {
     public int minDistance(String word1, String word2) {
+        //get longest common subsequence
         int[][] dp = new int[word1.length()+1][word2.length()+1];
         int common = longestCommonSubsequence(word1, word2, dp);
         
+        //subtract common subsequence length from both string and what's left is the no. of chars to be removed
         return (word1.length() - common) + (word2.length() - common);
     }
     
