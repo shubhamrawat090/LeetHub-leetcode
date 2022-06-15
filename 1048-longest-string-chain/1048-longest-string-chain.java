@@ -1,18 +1,27 @@
+
+//Time : NlogN + N * Length * Length
+//Space : O(N*Length)
 class Solution {
     public int longestStrChain(String[] words) {
-        Arrays.sort(words, (a, b) -> a.length()-b.length());
+        //Sort on length
+        //Time : NlogN
+        Arrays.sort(words, (a,b) -> a.length()-b.length());
         int res = 0;
-        HashMap<String, Integer> memo = new HashMap<>();
+        Map<String, Integer> memo = new HashMap<>();
         
-        for(String word: words) {
+        //Iterate on the words
+        //TIme : N * Length * Length
+        for(String word : words) {
+            //Put current word in map with default value.
             memo.put(word, 1);
-            
-            for(int i=0; i<word.length(); i++) {
-                StringBuilder currWord = new StringBuilder(word);
-                String delChar = currWord.deleteCharAt(i).toString();
-                
-                if(memo.containsKey(delChar)) {
-                    memo.put(word, Math.max(memo.get(delChar)+1, memo.get(word)));
+            //Time : Length * Length
+            for(int i = 0; i < word.length(); i++) {
+                StringBuilder current = new StringBuilder(word);
+                String next = current.deleteCharAt(i).toString(); //Time : Length
+                //Check if the value for next is already calculated
+                if(memo.containsKey(next)) {
+                    //Update the value in map with the maximum possible value
+                    memo.put(word, Math.max(memo.get(word), memo.get(next)+1));
                 }
             }
             
