@@ -35,14 +35,16 @@ class Solution {
         int left = helper(root.left);
         int right = helper(root.right);
         
+        //If any side is not monitored
         if(left==-1 || right==-1) {
-            //any side is not monitored
+            //add 1 camera to root
             count++;
-            return 0;
+            return 0;//return "camera added" to root
         }
         
+        //If any side has camera placed
         if(left==0 || right==0) {
-            //any side has camera, then we are monitored
+            //then we(root) are monitored
             return 1;
         }
         
