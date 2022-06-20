@@ -44,21 +44,21 @@ class Solution {
             ans[rem.i][rem.j] = rem.level;
             
             //add*
-            addN(rem.i+1, rem.j, rem.level+1, grid, vis, queue);
-            addN(rem.i-1, rem.j, rem.level+1, grid, vis, queue);
-            addN(rem.i, rem.j+1, rem.level+1, grid, vis, queue);
-            addN(rem.i, rem.j-1, rem.level+1, grid, vis, queue);
+            addN(rem.i+1, rem.j, rem.level+1, vis, queue);
+            addN(rem.i-1, rem.j, rem.level+1, vis, queue);
+            addN(rem.i, rem.j+1, rem.level+1, vis, queue);
+            addN(rem.i, rem.j-1, rem.level+1, vis, queue);
         }
         
         return ans;
     }
     
-    private void addN(int i, int j, int level, int[][] grid, boolean[][] vis, ArrayDeque<Pair> queue) {
-        int m = grid.length;
-        int n = grid[0].length;
+    private void addN(int i, int j, int level, boolean[][] vis, ArrayDeque<Pair> queue) {
+        int m = vis.length;
+        int n = vis[0].length;
         
         //out of bounds or 0 or already visited
-        if(i<0 || j<0 || i>=m || j>=n || grid[i][j] == 0 || vis[i][j]) {
+        if(i<0 || j<0 || i>=m || j>=n || vis[i][j]) {
             return;
         }
         
