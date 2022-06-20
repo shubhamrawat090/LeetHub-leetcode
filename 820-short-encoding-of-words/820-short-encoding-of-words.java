@@ -5,18 +5,18 @@ class Solution {
         
         int n = words.length;
         
+        //frequency map for words
         for(int i=0;i<n;i++) { 
             valid.put(words[i], valid.getOrDefault(words[i], 0) + 1);
         }
         
+        //
         for(int i=0;i<n;i++){
-            if(valid.get(words[i])>0){
-                for(int len=1;len<words[i].length();len++){
+            for(int len=1;len<words[i].length();len++){
                     if(valid.containsKey(words[i].substring(len))){
                         valid.put(words[i].substring(len), valid.get(words[i].substring(len)) - 1);
                     } 
-                }  
-            }
+            }  
         }
         
         int count=0;
