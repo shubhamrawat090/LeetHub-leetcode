@@ -1,5 +1,5 @@
 class Solution {
-    class Pair implements Comparable<Pair>{
+    class Pair{
         int i;
         int j;
         int time;
@@ -9,10 +9,6 @@ class Solution {
             this.j = j;
             this.time = time;
         }
-        
-        public int compareTo(Pair o) {
-            return this.time - o.time;
-        }
     }
     
     public int swimInWater(int[][] grid) {
@@ -20,7 +16,7 @@ class Solution {
         
         boolean[][] vis = new boolean[n][n];
         
-        PriorityQueue<Pair> pq = new PriorityQueue<>();
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.time - b.time);
         pq.add(new Pair(0, 0, grid[0][0]));
         
         while(pq.size()>0) {
