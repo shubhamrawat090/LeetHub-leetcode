@@ -24,9 +24,6 @@ class Solution {
                 if(grid[i][j] == 1) {
                     dfs(grid, i, j, q, vis);
                     found = true;
-                }
-                
-                if(found == true) {
                     break;
                 }
             }
