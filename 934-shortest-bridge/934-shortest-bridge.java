@@ -18,7 +18,7 @@ class Solution {
         boolean found = false;
         
         Queue<Pair> q = new ArrayDeque<>();
-        
+        System.out.println(q.size());
         for(int i=0; i<grid.length; i++) {
             for(int j=0; j<grid[0].length; j++) {
                 if(grid[i][j] == 1) {
