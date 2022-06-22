@@ -24,20 +24,20 @@ class Solution {
             return null;
         }
         
-        HashMap<Integer, Node> visited = new HashMap<>();
+        Node[] visited = new Node[101];
         return helper(node, visited);
     }
     
-    private Node helper(Node node, HashMap<Integer, Node> visited) {
+    private Node helper(Node node, Node[] visited) {
         Node nodeClone = new Node(node.val);
-        visited.put(node.val, nodeClone);
+        visited[node.val] = nodeClone;
         
         for(Node nbr: node.neighbors) {
-            if(visited.containsKey(nbr.val) == false) {
+            if(visited[nbr.val] == null) {
                 Node nbrClone = helper(nbr, visited);
                 nodeClone.neighbors.add(nbrClone);
             } else {
-                Node nbrClone = visited.get(nbr.val);
+                Node nbrClone = visited[nbr.val];
                 nodeClone.neighbors.add(nbrClone);
             }
         }
