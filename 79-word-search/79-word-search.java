@@ -21,11 +21,11 @@ class Solution {
                 return false;
         
         //making more options at leaf level in te recursion tree
+        //if first char's frequency in our board is more than last char's then swapping the word
         if(boardCharFreq[word.charAt(0) - 'A'] > boardCharFreq[word.charAt(word.length()-1) - 'A']){
-            char [] ca = new char[word.length()];
-            for(int i = 0, j = word.length()-1; j >= 0; j--, i++)
-                ca[i] = word.charAt(j);
-            word = new String(ca);
+            StringBuilder revWord = new StringBuilder(word);
+            revWord.reverse();
+            word = revWord.toString();
         }
             
         //------------------------------------------
