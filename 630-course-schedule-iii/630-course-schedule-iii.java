@@ -12,7 +12,7 @@ class Solution {
                     time += course[0];
                     pq.add(course[0]);
                 } else {
-                    if(pq.peek()>course[0]) {
+                    if(!pq.isEmpty() && pq.peek()>course[0]) {
                         time -= pq.remove();
                         time += course[0];
                         pq.add(course[0]);
