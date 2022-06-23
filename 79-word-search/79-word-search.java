@@ -4,6 +4,32 @@ class Solution {
     public boolean exist(char[][] board, String word) {
         int m = board.length, n = board[0].length;
         
+        //-----------------OPTIMIZATIONS------------
+        int[] wordCharFreq = new int['z'-'A'+1]; //A-Z and a-z
+        int[] boardCharFreq = new int['z'-'A'+1];
+        
+        for(char c : word.toCharArray())
+            wordCharFreq[c - 'A']++;
+        
+        for(int r = 0; r < m; r++)
+            for(int c = 0; c < n; c++)
+                boardCharFreq[board[r][c] - 'A']++;
+        
+        //check board has enough character occurances
+        for(char c : word.toCharArray())
+            if(boardCharFreq[c - 'A'] < wordCharFreq[c - 'A'])
+                return false;
+        
+        //making more options at leaf level in te recursion tree
+        if(boardCharFreq[word.charAt(0) - 'A'] > boardCharFreq[word.charAt(word.length()-1) - 'A']){
+            char [] ca = new char[word.length()];
+            for(int i = 0, j = word.length()-1; j >= 0; j--, i++)
+                ca[i] = word.charAt(j);
+            word = new String(ca);
+        }
+            
+        //------------------------------------------
+        
         for(int i=0; i<m; i++) {
             for(int j=0; j<n; j++) {
                 if(board[i][j] == word.charAt(0)) {
