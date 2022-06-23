@@ -4,18 +4,21 @@ class Solution {
         
         PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> b-a);
         
-        int time = 0;
+        int timeElapsed = 0;
         for(int[] course: courses) {
+            int duration = course[0];
+            int lastDay = course[1];
+            
             //only work if duration is within the last day to finish the course
-            if(course[0]<=course[1]) {
-                if(course[0] + time <= course[1]) {
-                    time += course[0];
-                    pq.add(course[0]);
+            if(duration<=lastDay) {
+                if(duration + timeElapsed <= lastDay) {
+                    timeElapsed += duration;
+                    pq.add(duration);
                 } else {
-                    if(!pq.isEmpty() && pq.peek()>course[0]) {
-                        time -= pq.remove();
-                        time += course[0];
-                        pq.add(course[0]);
+                    if(!pq.isEmpty() && pq.peek()>duration) {
+                        timeElapsed -= pq.remove();
+                        timeElapsed += duration;
+                        pq.add(duration);
                     }
                 }
             }
