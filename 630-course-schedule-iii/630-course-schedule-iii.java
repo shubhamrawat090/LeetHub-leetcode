@@ -16,8 +16,7 @@ class Solution {
                     pq.add(duration);
                 } else {
                     if(!pq.isEmpty() && pq.peek()>duration) {
-                        timeElapsed -= pq.remove();
-                        timeElapsed += duration;
+                        timeElapsed = timeElapsed - pq.remove() + duration;
                         pq.add(duration);
                     }
                 }
