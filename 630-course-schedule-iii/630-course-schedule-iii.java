@@ -13,11 +13,12 @@ class Solution {
             if(duration<=lastDay) {
                 if(duration + timeElapsed <= lastDay) {
                     timeElapsed += duration;
-                    pq.add(duration);
+                    pq.offer(duration);
                 } else {
                     if(!pq.isEmpty() && pq.peek()>duration) {
-                        timeElapsed = timeElapsed - pq.remove() + duration;
-                        pq.add(duration);
+                        timeElapsed = timeElapsed - pq.poll();
+                        timeElapsed += duration;
+                        pq.offer(duration);
                     }
                 }
             }
