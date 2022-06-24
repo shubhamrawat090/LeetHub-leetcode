@@ -6,6 +6,8 @@
 // 4. Update maxVal = maxVal - diff. sum
 // 5. Repeat till all values become 1 in array.
 
+
+// TIME: O(Nlog(maxVal)), Space: log(maxVal) for recursive stack
 class Solution {
     public boolean isPossible(int[] target) {
         long sum = 0;
