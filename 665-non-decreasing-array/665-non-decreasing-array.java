@@ -20,7 +20,10 @@ class Solution {
 		arr[index] = temp;
 		arr[index + 1] = temp;
         //check if anomalies are fixed
-		return findAnomaly(arr) == -1;
+		if (findAnomaly(arr) == -1) {
+			return true;
+		}
+		return false;
 	}
 
 	public int findAnomaly(int[] arr) {
