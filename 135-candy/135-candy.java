@@ -25,8 +25,7 @@ class Solution {
         //get maximum of both left and right combined
         int totalCandies = 0;
         for(int i=0; i<size; i++) {
-            left[i] = Math.max(left[i], right[i]);
-            totalCandies += left[i];
+            totalCandies += Math.max(left[i], right[i]);
         }
         
         return totalCandies;
