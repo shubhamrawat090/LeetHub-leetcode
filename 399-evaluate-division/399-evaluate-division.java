@@ -62,7 +62,7 @@ class Solution {
             //if src or dest is not available then initialize it
             g.putIfAbsent(src, new ArrayList());
             g.putIfAbsent(des, new ArrayList());
-            //find the variable src/dest and ad the corresponding values to it like
+            //find the variable src/dest and add the corresponding values to it like
             // src->dest = val , dest->src = 1/val
             // add those as nodes in graph
             g.get(src).add(new Node(des, values[i]));
