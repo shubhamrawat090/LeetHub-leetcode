@@ -57,14 +57,14 @@ class Solution {
         if(parent[val] == val) {
             return val;
         } else {
-            //can be written as 
-            int parentOfVal = parent[val];
-            int leader = find(parentOfVal);
-            parent[val] = leader;
-            return leader;
+            // //can be written as 
+            // int parentOfVal = parent[val];
+            // int leader = find(parentOfVal);
+            // parent[val] = leader;
+            // return leader;
            
-            // parent[val] = find(parent[val]);
-            // return parent[val];
+            parent[val] = find(parent[val]);
+            return parent[val];
         }
     }
     
