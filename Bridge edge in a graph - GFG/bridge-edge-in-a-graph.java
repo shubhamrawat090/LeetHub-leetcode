@@ -39,7 +39,8 @@ class DriverClass
 class Solution
 {
     //Function to find if the given edge is a bridge in graph.
-    static int isBridge(int V, ArrayList<ArrayList<Integer>> adj,int c,int d)
+    static int bridge = 0;
+    static int isBridge(int V, ArrayList<ArrayList<Integer>> adj, int c, int d)
     {
         // code here
         boolean[] vis = new boolean[V];
@@ -47,27 +48,26 @@ class Solution
         int[] low = new int[V];
         
         time = 0;
-        res = 0;
-        for(int i = 0; i < V; i++){
-            if(vis[i] == false){
+        bridge = 0;
+        
+        for(int i=0; i<V; i++) {
+            if(!vis[i]) {
                 dfs(adj, vis, dis, low, i, -1, c, d);
             }
         }
         
-        return res;
+        return bridge;
     }
     
     static int time = 0;
-    static int res = 0;
-    
-    public static void dfs(ArrayList<ArrayList<Integer>> adj, boolean[] vis, int[] dis, int[] low, int u, int p, int c, int d){
+    static void dfs(ArrayList<ArrayList<Integer>> adj, boolean[] vis, int[] dis, int[] low, int u, int p, int c, int d) {
         vis[u] = true;
         dis[u] = low[u] = ++time;
         
-        for(int v: adj.get(u)){
-            if(v == p){
+        for(int v: adj.get(u)) {
+            if(v == p) {
                 continue;
-            } else if(vis[v] == true){
+            } else if(vis[v]) {
                 low[u] = Math.min(low[u], dis[v]);
             } else {
                 dfs(adj, vis, dis, low, v, u, c, d);
@@ -75,7 +75,7 @@ class Solution
                 
                 if(low[v] > dis[u]){
                     if(c == v && d == u || c == u && d == v){
-                        res = 1;
+                        bridge = 1;
                     }
                 }
             }
