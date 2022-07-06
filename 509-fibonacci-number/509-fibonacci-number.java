@@ -1,11 +1,13 @@
 class Solution {
     public int fib(int n) {
         // return rec(n);
-        int[] dp = new int[n+1];
+        // int[] dp = new int[n+1];
         // Arrays.fill(dp, -1);
         // return memo(n, dp);
         
-        return tabulate(n, dp);
+        // return tabulate(n, dp);
+        
+        return spaceOptimize(n);
     }
     
     public int rec(int n) {
@@ -37,5 +39,20 @@ class Solution {
         }
         
         return dp[n];
+    }
+    
+    public int spaceOptimize(int n) {
+        if(n == 0 || n == 1) {
+            return n;
+        }
+        
+        int first = 0, second = 1;
+        for(int i=2; i<=n; i++) {
+            int curr = first + second;
+            first = second;
+            second = curr;
+        }
+        
+        return second;
     }
 }
