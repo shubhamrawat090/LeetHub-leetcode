@@ -1,5 +1,9 @@
 class Solution {
     public int fib(int n) {
+        return rec(n);
+    }
+    
+    public int rec(int n) {
         if(n==0 || n==1)
             return n;
         
