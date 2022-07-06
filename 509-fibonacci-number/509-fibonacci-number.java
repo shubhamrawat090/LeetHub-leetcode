@@ -2,8 +2,10 @@ class Solution {
     public int fib(int n) {
         // return rec(n);
         int[] dp = new int[n+1];
-        Arrays.fill(dp, -1);
-        return memo(n, dp);
+        // Arrays.fill(dp, -1);
+        // return memo(n, dp);
+        
+        return tabulate(n, dp);
     }
     
     public int rec(int n) {
@@ -23,4 +25,17 @@ class Solution {
         
         return dp[n] = memo(n-1, dp) + memo(n-2, dp);
     } 
+    
+    public int tabulate(int n, int[] dp) {
+        for(int i=0; i<=n; i++) {
+            if(i==0 || i==1) {
+                dp[i] = i;
+                continue;
+            }
+            
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        
+        return dp[n];
+    }
 }
