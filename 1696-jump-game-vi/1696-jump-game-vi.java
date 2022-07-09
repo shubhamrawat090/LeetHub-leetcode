@@ -1,6 +1,5 @@
 class Solution {
     public int maxResult(int[] nums, int k) {
-        
         int n = nums.length;
        
         //holds max value idx at front and min at last
@@ -22,6 +21,6 @@ class Solution {
             }
         }
         
-        return nums[nums.length-1];
+        return nums[n-1];
     }
 }
