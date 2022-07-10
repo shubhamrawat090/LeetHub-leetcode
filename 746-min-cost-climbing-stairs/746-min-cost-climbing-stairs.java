@@ -1,73 +1,52 @@
 class Solution {
-    public int helper(int idx, int[] cost, int[] dp){
-        if(idx == cost.length){
+    public int minCostClimbingStairs(int[] cost) {
+        int[] dp = new int[cost.length + 1];
+        Arrays.fill(dp, -1);
+        return Math.min(memo(cost, 0, dp), memo(cost, 1, dp));
+        // return Math.min(rec(cost, 0), rec(cost, 1));
+    }
+    
+    private int rec(int[] cost, int idx) {
+        if(idx == cost.length) {
+            return 0;
+        }
+        
+        //1 step
+        int step1 = 0;
+        if(idx+1 <= cost.length) {
+            step1 += rec(cost, idx+1);
+        }
+        
+        //2 steps
+        int step2 = 0;
+        if(idx+2 <= cost.length) {
+            step2 += rec(cost, idx+2);
+        }
+        
+        return cost[idx] + Math.min(step1, step2);
+    }
+    
+    private int memo(int[] cost, int idx, int[] dp) {
+        if(idx == cost.length) {
             return dp[idx] = 0;
         }
         
-        if(dp[idx] != 0){
+        if(dp[idx] != -1) {
             return dp[idx];
         }
         
-        int ans = cost[idx];
-        
+        //1 step
         int step1 = 0;
-        
-        if(idx+1<=cost.length){
-            step1+=helper(idx+1, cost, dp);
+        if(idx+1 <= cost.length) {
+            step1 += memo(cost, idx+1, dp);
         }
         
+        //2 steps
         int step2 = 0;
-        
-        if(idx+2<=cost.length){
-            step2+=helper(idx+2, cost, dp);
+        if(idx+2 <= cost.length) {
+            step2 += memo(cost, idx+2, dp);
         }
         
-        return dp[idx] = ans + Math.min(step1, step2);
-    }
-    
-    public int minCostClimbingStairs(int[] cost) {
-        //memoize
-//         int[] dp = new int[cost.length + 1];
-//         int start0 = helper(0, cost, dp);
-//         int start1 = helper(1, cost, dp);
-        
-//         return Math.min(start0, start1);
-        
-        //tabular
-//         int[] dp = new int[cost.length+1];
-//         for(int idx = cost.length; idx>=0; idx--){
-//             if(idx == cost.length){
-//                 dp[idx] = 0;
-//                 continue;
-//             }
-            
-//             int ans = cost[idx];
-
-//             int step1 = 0;
-
-//             if(idx+1<=cost.length){
-//                 step1+=dp[idx+1];
-//             }
-
-//             int step2 = 0;
-
-//             if(idx+2<=cost.length){
-//                 step2+=dp[idx+2];
-//             }
-
-//             dp[idx] = ans + Math.min(step1, step2);
-//         }
-        
-//         return Math.min(dp[0], dp[1]);
-        
-        //space optimize
-        int next1 = cost[cost.length - 2], next2 = cost[cost.length-1];
-        for(int idx = cost.length-3; idx>=0; idx--){
-            int minCost = cost[idx] + Math.min(next1, next2);
-            next2 = next1;
-            next1 = minCost;
-        }
-        
-        return Math.min(next1, next2);
+        return dp[idx] = cost[idx] + Math.min(step1, step2);
     }
 }
