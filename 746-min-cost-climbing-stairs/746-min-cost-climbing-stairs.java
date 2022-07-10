@@ -1,11 +1,17 @@
 class Solution {
     public int minCostClimbingStairs(int[] cost) {
         int[] dp = new int[cost.length + 1];
-        Arrays.fill(dp, -1);
-        return Math.min(memo(cost, 0, dp), memo(cost, 1, dp));
+        
+        return tab(cost, dp);
+        
+        // Arrays.fill(dp, -1);
+        // return Math.min(memo(cost, 0, dp), memo(cost, 1, dp));
+        
+        
         // return Math.min(rec(cost, 0), rec(cost, 1));
     }
     
+    // RECURSIVE
     private int rec(int[] cost, int idx) {
         if(idx == cost.length) {
             return 0;
@@ -26,6 +32,8 @@ class Solution {
         return cost[idx] + Math.min(step1, step2);
     }
     
+    
+    // MEMOIZED
     private int memo(int[] cost, int idx, int[] dp) {
         if(idx == cost.length) {
             return dp[idx] = 0;
@@ -48,5 +56,31 @@ class Solution {
         }
         
         return dp[idx] = cost[idx] + Math.min(step1, step2);
+    }
+    
+    // TABULATE
+    private int tab(int[] cost, int[] dp) {
+        for(int idx = cost.length; idx>=0; idx--) {
+            if(idx == cost.length) {
+                dp[idx] = 0;
+                continue;
+            }
+
+            //1 step
+            int step1 = 0;
+            if(idx+1 <= cost.length) {
+                step1 += dp[idx+1];
+            }
+
+            //2 steps
+            int step2 = 0;
+            if(idx+2 <= cost.length) {
+                step2 += dp[idx+2];
+            }
+
+            dp[idx] = cost[idx] + Math.min(step1, step2);
+        }
+        
+        return Math.min(dp[0], dp[1]);
     }
 }
