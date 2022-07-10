@@ -1,12 +1,13 @@
 class Solution {
     public int minCostClimbingStairs(int[] cost) {
-        int[] dp = new int[cost.length + 1];
+        // int[] dp = new int[cost.length + 1];
         
-        return tab(cost, dp);
+        return spaceOptimize(cost);
+        
+        // return tab(cost, dp);
         
         // Arrays.fill(dp, -1);
         // return Math.min(memo(cost, 0, dp), memo(cost, 1, dp));
-        
         
         // return Math.min(rec(cost, 0), rec(cost, 1));
     }
@@ -82,5 +83,17 @@ class Solution {
         }
         
         return Math.min(dp[0], dp[1]);
+    }
+    
+    // TABULATE
+    private int spaceOptimize(int[] cost) {
+        int next = cost[cost.length-2], next1 = cost[cost.length-1];
+        for(int idx = cost.length-3; idx>=0; idx--) {
+            int curr = cost[idx] + Math.min(next, next1);
+            next1 = next;
+            next = curr;
+        }
+        
+        return Math.min(next, next1);
     }
 }
