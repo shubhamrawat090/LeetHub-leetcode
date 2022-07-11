@@ -4,6 +4,7 @@ class Solution {
         int[] outDegree = new int[n+1];
         
         for(int[] t: trust) {
+            // [1, 2] means 1 --> 2, this signifies outgoing edge from 1 and incoming edge to 2 
             outDegree[t[0]]++;
             inDegree[t[1]]++;
         }
