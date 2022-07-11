@@ -55,14 +55,13 @@ class Solution {
         
         vis[src] = true;
         
+        boolean pathPresent = false;
         for(int nbr: graph.get(src)) {
             if(!vis[nbr]) {
-                if(dfs(graph, nbr, dest, vis) == true) {
-                    return true;
-                }
+                pathPresent |= dfs(graph, nbr, dest, vis);
             }
         }
         
-        return false;
+        return pathPresent;
     }
 }
