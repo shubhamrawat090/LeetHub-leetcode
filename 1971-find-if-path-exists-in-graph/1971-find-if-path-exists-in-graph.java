@@ -17,7 +17,28 @@ class Solution {
         
         boolean[] vis = new boolean[n];
         
-        return dfs(graph, source, destination, vis);
+        return bfs(graph, source, destination, vis);
+    }
+    
+    private boolean bfs(ArrayList<ArrayList<Integer>> graph, int src, int dest, boolean[] vis) {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(src);
+        vis[src] = true;
+
+        while(q.size() > 0){
+            int remVtx = q.remove();
+            
+            for(int nbr : graph.get(remVtx)){
+                if(!vis[nbr]){
+                    if(nbr == dest)
+                        return true;
+                    vis[nbr] = true;
+                    q.add(nbr);
+                }
+            }
+        }
+        
+        return false;
     }
     
     private boolean dfs(ArrayList<ArrayList<Integer>> graph, int src, int dest, boolean[] vis) {
