@@ -23,16 +23,25 @@ class Solution {
     private boolean bfs(ArrayList<ArrayList<Integer>> graph, int src, int dest, boolean[] vis) {
         Queue<Integer> q = new LinkedList<>();
         q.add(src);
-        vis[src] = true;
 
         while(q.size() > 0){
+            //r m* w a*
             int remVtx = q.remove();
+            
+            if(vis[remVtx] == true) {
+                continue;
+            }
+            vis[remVtx] = true;
+            
+            if(remVtx == dest) {
+                return true;
+            }
             
             for(int nbr : graph.get(remVtx)){
                 if(!vis[nbr]){
                     if(nbr == dest)
                         return true;
-                    vis[nbr] = true;
+                    
                     q.add(nbr);
                 }
             }
