@@ -9,6 +9,7 @@ class Solution {
             inDegree[t[1]]++;
         }
         
+        // Check if outgoing edges = 0 and incoming edges = n-1
         for(int i=1; i<=n; i++) {
             if(outDegree[i] == 0 && inDegree[i] == n-1) {
                 return i;
