@@ -17,7 +17,8 @@ class Solution {
         
         boolean[] vis = new boolean[n];
         
-        return bfs(graph, source, destination, vis);
+        // return bfs(graph, source, destination, vis);
+        return dfs(graph, source, destination, vis);
     }
     
     private boolean bfs(ArrayList<ArrayList<Integer>> graph, int src, int dest, boolean[] vis) {
