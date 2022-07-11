@@ -39,9 +39,6 @@ class Solution {
             
             for(int nbr : graph.get(remVtx)){
                 if(!vis[nbr]){
-                    if(nbr == dest)
-                        return true;
-                    
                     q.add(nbr);
                 }
             }
