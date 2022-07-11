@@ -49,14 +49,14 @@ class Solution {
     }
     
     private boolean dfs(ArrayList<ArrayList<Integer>> graph, int src, int dest, boolean[] vis) {
+        if(src == dest) {
+            return true;
+        }
+        
         vis[src] = true;
         
         for(int nbr: graph.get(src)) {
             if(!vis[nbr]) {
-                if(nbr == dest) {
-                    return true;
-                }
-                
                 if(dfs(graph, nbr, dest, vis) == true) {
                     return true;
                 }
