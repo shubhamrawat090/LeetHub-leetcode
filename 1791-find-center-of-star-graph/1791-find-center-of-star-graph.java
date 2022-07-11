@@ -1,23 +1,25 @@
 class Solution {
     public int findCenter(int[][] edges) {
-        int n = edges.length;
-        int[] inDegree = new int[n+2];
-        int[] outDegree = new int[n+2];
+        int[] firstEdge = edges[0];
+        int[] secondEdge = edges[1];
         
-        for(int[] e: edges) {
-            inDegree[e[0]]++;
-            outDegree[e[0]]++;
-            
-            inDegree[e[1]]++;
-            outDegree[e[1]]++;
+        int center = -1;
+        if(firstEdge[0] == secondEdge[0] || firstEdge[0] == secondEdge[1]) {
+            center = firstEdge[0];
         }
         
-        for(int i=1; i<=n+1; i++) {
-            if(inDegree[i] == n) {
-                return i;
-            }
+        if(firstEdge[1] == secondEdge[0] || firstEdge[1] == secondEdge[1]) {
+            center = firstEdge[1];
         }
         
-        return -1;
+        if(secondEdge[0] == firstEdge[0] || secondEdge[0] == firstEdge[1]) {
+            center = secondEdge[0];
+        }
+        
+        if(secondEdge[1] == firstEdge[0] || secondEdge[1] == firstEdge[1]) {
+            center = secondEdge[1];
+        }
+        
+        return center;
     }
 }
