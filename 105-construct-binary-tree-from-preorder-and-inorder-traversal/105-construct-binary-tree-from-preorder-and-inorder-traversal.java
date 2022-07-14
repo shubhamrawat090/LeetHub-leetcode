@@ -15,32 +15,29 @@
  */
 class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        HashMap<Integer, Integer> inordMap = new HashMap();
+        HashMap<Integer, Integer> inMap = new HashMap<>();
         for(int i=0; i<inorder.length; i++) {
-            int val = inorder[i];
-            inordMap.put(val, i);
+            inMap.put(inorder[i], i);
         }
-        TreeNode root = construct(0, preorder.length-1, 0, inorder.length-1, preorder, inordMap);
-        return root;
+        
+        return helper(0, preorder.length-1, 0, inorder.length-1, preorder, inorder, inMap);
     }
     
-    private TreeNode construct(int pre_lo, int pre_hi, int in_lo, int in_hi, int[] pre, HashMap<Integer, Integer> inordMap) {
-        //base case
-        if(pre_lo > pre_hi) {
+    private TreeNode helper(int preLo, int preHi, int inLo, int inHi, int[] pre, int[] in, HashMap<Integer, Integer> inMap) {
+        
+        if(preLo > preHi) {
             return null;
         }
         
-        TreeNode node = new TreeNode();
+        TreeNode root = new TreeNode(pre[preLo]);
         
-        node.val = pre[pre_lo];
+        int inPos = inMap.get(pre[preLo]);
+        int elemToLeft = inPos - inLo;
+        int elemToRight = inHi - inPos;
         
-        int idx = inordMap.get(pre[pre_lo]);
+        root.left = helper(preLo+1, preLo+elemToLeft, inLo, inPos-1, pre, in, inMap);
+        root.right = helper(preLo+elemToLeft+1, preHi, inPos+1, inHi, pre, in, inMap);
         
-        int lhs = idx - in_lo;
-        
-        node.left = construct(pre_lo+1, pre_lo+lhs, in_lo, idx-1, pre, inordMap);
-        node.right = construct(pre_lo+lhs+1, pre_hi, idx+1, in_hi, pre, inordMap);
-        
-        return node;
+        return root;
     }
 }
