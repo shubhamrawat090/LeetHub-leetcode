@@ -16,27 +16,33 @@
 class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         HashMap<Integer, Integer> inMap = new HashMap<>();
+        //inorder map: elem -> idx
         for(int i=0; i<inorder.length; i++) {
             inMap.put(inorder[i], i);
         }
         
-        return helper(0, preorder.length-1, 0, inorder.length-1, preorder, inorder, inMap);
+        return helper(0, preorder.length-1, 0, inorder.length-1, preorder, inMap);
     }
     
-    private TreeNode helper(int preLo, int preHi, int inLo, int inHi, int[] pre, int[] in, HashMap<Integer, Integer> inMap) {
-        
+    private TreeNode helper(int preLo, int preHi, int inLo, int inHi, int[] pre, HashMap<Integer, Integer> inMap) {
+        //out of bounds
         if(preLo > preHi) {
             return null;
         }
         
+        //preorder's left most is the root
         TreeNode root = new TreeNode(pre[preLo]);
         
+        //get position of curr root in inorder
         int inPos = inMap.get(pre[preLo]);
+        
+        //get no. of elements in the left & right subtree which will be told by the inorder array as => Left Node Right
         int elemToLeft = inPos - inLo;
         int elemToRight = inHi - inPos;
         
-        root.left = helper(preLo+1, preLo+elemToLeft, inLo, inPos-1, pre, in, inMap);
-        root.right = helper(preLo+elemToLeft+1, preHi, inPos+1, inHi, pre, in, inMap);
+        //get the left and right subtree of root built by the helper()
+        root.left = helper(preLo+1, preLo+elemToLeft, inLo, inPos-1, pre, inMap);
+        root.right = helper(preLo+elemToLeft+1, preHi, inPos+1, inHi, pre, inMap);
         
         return root;
     }
