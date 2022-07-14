@@ -38,7 +38,6 @@ class Solution {
         
         //get no. of elements in the left & right subtree which will be told by the inorder array as => Left Node Right
         int elemToLeft = inPos - inLo;
-        int elemToRight = inHi - inPos;
         
         //get the left and right subtree of root built by the helper()
         root.left = helper(preLo+1, preLo+elemToLeft, inLo, inPos-1, pre, inMap);
