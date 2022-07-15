@@ -1,6 +1,4 @@
-class Solution {
-    int[][] dir = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-    
+class Solution {    
     public int maxAreaOfIsland(int[][] grid) {
         int m = grid.length, n = grid[0].length;
         
@@ -25,12 +23,10 @@ class Solution {
         
         int elems = 1;
         
-        for(int[] d: dir) {
-            int newI = i + d[0];
-            int newJ = j + d[1];
-            
-            elems += areaDFS(grid, newI, newJ, m, n);
-        }
+        elems += areaDFS(grid, i+1, j, m, n);
+        elems += areaDFS(grid, i-1, j, m, n);
+        elems += areaDFS(grid, i, j+1, m, n);
+        elems += areaDFS(grid, i, j-1, m, n);
         
         return elems;
     }
