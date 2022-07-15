@@ -21,13 +21,6 @@ class Solution {
         
         grid[i][j] = -1;
         
-        int elems = 1;
-        
-        elems += areaDFS(grid, i+1, j, m, n);
-        elems += areaDFS(grid, i-1, j, m, n);
-        elems += areaDFS(grid, i, j+1, m, n);
-        elems += areaDFS(grid, i, j-1, m, n);
-        
-        return elems;
+        return 1 + areaDFS(grid, i+1, j, m, n) + areaDFS(grid, i-1, j, m, n) + areaDFS(grid, i, j+1, m, n) + areaDFS(grid, i, j-1, m, n);
     }
 }
