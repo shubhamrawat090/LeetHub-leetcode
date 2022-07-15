@@ -1,4 +1,14 @@
-class Solution {    
+class Solution { 
+    class Pair {
+        int i;
+        int j;
+        
+        Pair(int x, int y) {
+            i = x;
+            j = y;
+        }
+    }
+    
     public int maxAreaOfIsland(int[][] grid) {
         int m = grid.length, n = grid[0].length;
         
@@ -6,7 +16,7 @@ class Solution {
         for(int i=0; i<m; i++) {
             for(int j=0; j<n; j++) {
                 if(grid[i][j] == 1) {
-                    maxArea = Math.max(maxArea, areaDFS(grid, i, j, m, n));
+                    maxArea = Math.max(maxArea, areaBFS(grid, i, j, m, n));
                 }
             }
         }
@@ -14,13 +24,36 @@ class Solution {
         return maxArea;
     }
     
-    private int areaDFS(int[][] grid, int i, int j, int m, int n) {
-        if(i<0 || i>=m || j<0 || j>=n || grid[i][j] == 0 || grid[i][j] == -1) {
-            return 0;
+    private int areaBFS(int[][] grid, int i, int j, int m, int n) {
+        Queue<Pair> q = new ArrayDeque<>();
+        
+        q.add(new Pair(i, j));
+        
+        int elems = 0;
+        while(q.size() > 0) {
+            //r m* w a*
+            Pair rem = q.remove();
+            
+            if(grid[rem.i][rem.j] == 0 || grid[rem.i][rem.j] == -1) {
+                continue;
+            }
+            
+            grid[rem.i][rem.j] = -1;
+            
+            elems += 1;
+            
+            addN(grid, rem.i+1, rem.j, m, n, q);
+            addN(grid, rem.i-1, rem.j, m, n, q);
+            addN(grid, rem.i, rem.j+1, m, n, q);
+            addN(grid, rem.i, rem.j-1, m, n, q);
         }
         
-        grid[i][j] = -1;
-        
-        return 1 + areaDFS(grid, i+1, j, m, n) + areaDFS(grid, i-1, j, m, n) + areaDFS(grid, i, j+1, m, n) + areaDFS(grid, i, j-1, m, n);
+        return elems;
+    }
+    
+    private void addN(int[][] grid, int i, int j, int m, int n, Queue<Pair> q) {
+        if(i>=0 && i<m && j>=0 && j<n && grid[i][j] == 1) {
+            q.add(new Pair(i, j));
+        }
     }
 }
