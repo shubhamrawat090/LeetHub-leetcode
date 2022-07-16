@@ -59,7 +59,7 @@ class Solution {
         long left = memo(m, n, maxMoves-1, startRow, startColumn-1, dp);
         long right = memo(m, n, maxMoves-1, startRow, startColumn+1, dp);
         
-        moves += (up % MOD) + (down % MOD) + (left % MOD) + (right % MOD);
+        moves += (up) + (down) + (left) + (right);
         
         return dp[startRow][startColumn][maxMoves] = (int)(moves % MOD);
     }
