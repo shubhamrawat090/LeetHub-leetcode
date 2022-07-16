@@ -1,66 +1,30 @@
 class Solution {
+    int[][][] cache;
+    int MOD = 1000_000_007;
     public int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
-        int[][][] dp = new int[51][51][51];
-        
-        //fill entire dp with -1
-        for(int[][] d: dp) {
-            for(int[] arr: d) {
-                Arrays.fill(arr, -1);
+        cache = new int[m][n][maxMove + 1];
+        for(int[][] cc : cache) {
+            for(int[] c : cc) {
+                Arrays.fill(c, -1);
             }
         }
-        
-        return memo(m, n, maxMove, startRow, startColumn, dp);
-        // return rec(m, n, maxMove, startRow, startColumn);
-        
+        return f(m, n, maxMove, startRow, startColumn);
     }
-    
-    // RECURSIVE
-    public int rec(int m, int n, int maxMove, int startRow, int startColumn) {
-        if(maxMove < 0) {
-            return 0; //all allowed moves finished
-        }
-        
-        if(startRow < 0 || startRow >= m  || startColumn < 0 || startColumn >= n) {
-            return 1;//got outside 1 path
-        }
-        
-        int moves = 0;
-        int MOD = 1000000007;
-        
-        int up = rec(m, n, maxMove-1, startRow-1, startColumn);
-        int down = rec(m, n, maxMove-1, startRow+1, startColumn);
-        int left = rec(m, n, maxMove-1, startRow, startColumn-1);
-        int right = rec(m, n, maxMove-1, startRow, startColumn+1);
-        
-        moves += (up % MOD) + (down % MOD) + (left % MOD) + (right % MOD);
-        
-        return moves % MOD;
-    }
-    
-    // MEMOIZED
-    public int memo(int m, int n, int maxMoves, int startRow, int startColumn, int[][][] dp) {
-        if(maxMoves < 0) {
-            return 0; //all allowed moves finished
-        }
-        
-        if(startRow < 0 || startRow >= m  || startColumn < 0 || startColumn >= n) {
+    int f(int m, int n, int max, int r, int c) {
+        if(r < 0 || c < 0 || r == m || c == n) {
             return 1;
         }
-        
-        if(dp[startRow][startColumn][maxMoves] != -1) {
-            return dp[startRow][startColumn][maxMoves];
+        if(max == 0) {
+            return 0;
         }
-        
-        long moves = 0;
-        int MOD = 1000000007;
-        
-        long up = memo(m, n, maxMoves-1, startRow-1, startColumn, dp);
-        long down = memo(m, n, maxMoves-1, startRow+1, startColumn, dp);
-        long left = memo(m, n, maxMoves-1, startRow, startColumn-1, dp);
-        long right = memo(m, n, maxMoves-1, startRow, startColumn+1, dp);
-        
-        moves += (up) + (down) + (left) + (right);
-        
-        return dp[startRow][startColumn][maxMoves] = (int)(moves % MOD);
+        if(cache[r][c][max] > -1) {
+            return cache[r][c][max];
+        }
+        long l = f(m, n, max - 1, r - 1, c) % MOD;
+        l += f(m, n, max - 1, r + 1, c) % MOD;
+        l += f(m, n, max - 1, r, c + 1) % MOD;
+        l += f(m, n, max - 1, r, c - 1) % MOD;
+        cache[r][c][max] = (int)(l % MOD);
+        return cache[r][c][max];
     }
 }
