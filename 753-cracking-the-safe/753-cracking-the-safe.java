@@ -1,3 +1,8 @@
+//////// HAMILTONIAN PATH IMPLEMENTATION //////////
+/* If we consider all the passwords like 00, 01, 11, 10 for n=2, k=2
+   we can see that all passwords(or vtx of a graph) are visited 
+   and no password is visited more than once */
+
 class Solution {
     public String crackSafe(int n, int k) {
         StringBuilder ans = new StringBuilder();
