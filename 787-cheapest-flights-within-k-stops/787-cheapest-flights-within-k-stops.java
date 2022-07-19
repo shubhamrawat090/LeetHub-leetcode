@@ -7,7 +7,7 @@ class Solution {
         int[] distPlus1 = null;
         
         for(int i=1; i<=k+1; i++) {
-            distPlus1 = dist.clone();
+            distPlus1 = Arrays.copyOf(dist, dist.length);
             for(int[] flight: flights) {
                 // going from u --> v
                 int u = flight[0];
