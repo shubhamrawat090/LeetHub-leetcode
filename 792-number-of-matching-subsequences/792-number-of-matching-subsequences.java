@@ -2,6 +2,7 @@ class Solution {
     public int numMatchingSubseq(String s, String[] words) {
         int count = 0;
         
+        //just store duplicate words and their count inside hashmap so that you won't have to check for it again
         HashMap<String, Integer> map = new HashMap<>();
         for(String word: words) {
             map.put(word, map.getOrDefault(word, 0) + 1);
