@@ -4,18 +4,12 @@ class Solution {
             return false;
         }
         
-        int[] freq = new int[26];
-        for(int i=0; i<s.length(); i++) {
-            freq[s.charAt(i) - 'a']++;
-            freq[t.charAt(i) - 'a']--;
-        }
+        char[] sArr = s.toCharArray();
+        char[] tArr = t.toCharArray();
         
-        for(int i=0; i<26; i++) {
-            if(freq[i] != 0) {
-                return false;
-            }
-        }
+        Arrays.sort(sArr);
+        Arrays.sort(tArr);
         
-        return true;
+        return Arrays.equals(sArr, tArr);
     }
 }
