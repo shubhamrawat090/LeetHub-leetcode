@@ -12,22 +12,22 @@ class Solution {
     }
     
     private boolean isMatching(String word, String pattern) {
-        char[] patternToWord = new char[26];
-        char[] wordToPattern = new char[26];
+        HashMap<Character, Character> patternToWord = new HashMap<>();
+        HashMap<Character, Character> wordToPattern = new HashMap<>();
         
         for(int i=0; i<word.length(); i++) {
             char wordChar = word.charAt(i);
             char patternChar = pattern.charAt(i);
             
-            if(patternToWord[patternChar - 'a'] == 0) {
-                patternToWord[patternChar - 'a'] = wordChar;
+            if(!patternToWord.containsKey(patternChar)) {
+                patternToWord.put(patternChar, wordChar);
             }
             
-            if(wordToPattern[wordChar - 'a'] == 0) {
-                wordToPattern[wordChar - 'a'] = patternChar;
+            if(!wordToPattern.containsKey(wordChar)) {
+                wordToPattern.put(wordChar, patternChar);
             }
             
-            if(patternToWord[patternChar - 'a'] != wordChar || wordToPattern[wordChar - 'a'] != patternChar) {
+            if(patternToWord.get(patternChar) != wordChar || wordToPattern.get(wordChar) != patternChar) {
                 return false;
             }
         }
