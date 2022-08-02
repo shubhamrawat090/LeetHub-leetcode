@@ -1,3 +1,4 @@
+// CHAINING TECHNIQUE
 class Solution {
     public int maxChunksToSorted(int[] arr) {
         int max = 0;
