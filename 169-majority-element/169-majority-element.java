@@ -1,19 +1,27 @@
+// if any value occurs more than size/2 times, it means others numbers freq cannot make it 0 when subtracted to it
+
+// we consider first elem to be majority, keep iterating again.
+// if this is same as elem so far, increment count
+// if new elem occurred, decrement count
+// if count == 0, increment count & this element is now the new majority element
+
 class Solution {
     public int majorityElement(int[] nums) {
-        HashMap<Integer, Integer> map = new HashMap<>();
+        int count = 0, majority = 0;
         
         for(int num: nums) {
-            map.put(num, map.getOrDefault(num, 0)+1);
-        }
-        
-        int maxFreq = 0, majorityElem = -1;
-        for(int num: map.keySet()) {
-            if(map.get(num) > maxFreq) {
-                maxFreq = map.get(num);
-                majorityElem = num;
+            if(count == 0) {
+                majority = num;
+                count++;
+            } else {
+                if(num == majority) {
+                    count++;
+                } else {
+                    count--;
+                }
             }
         }
         
-        return majorityElem;
+        return majority;
     }
 }
