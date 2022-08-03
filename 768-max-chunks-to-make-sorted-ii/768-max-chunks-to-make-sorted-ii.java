@@ -11,7 +11,7 @@ class Solution {
             rightMin[i] = Math.min(rightMin[i+1], arr[i]);
         }
         
-        
+        //iterate and compare leftMax and rightMin
         for(int i=0; i<arr.length; i++) {
             lmax = Math.max(lmax, arr[i]);
             
