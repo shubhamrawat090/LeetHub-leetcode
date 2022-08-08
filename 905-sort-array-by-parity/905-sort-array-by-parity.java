@@ -4,24 +4,16 @@ class Solution {
         int evenPtr = 0, oddPtr = nums.length-1;
         
         while(evenPtr < oddPtr) {
-            // left side odd
-            if(nums[evenPtr] % 2 != 0) {
-                // right side even
-                if(nums[oddPtr] % 2 == 0) {
-                    swap(nums, evenPtr, oddPtr);
-                    evenPtr++;
-                    oddPtr--;
-                }
-                
-                // right side odd
-                else {
-                    oddPtr--;
-                }
+            while(nums[evenPtr] % 2 == 0 && evenPtr < oddPtr) {
+                evenPtr++;
             }
             
-            // left side even
-            else {
-                evenPtr++;
+            while(nums[oddPtr] % 2 != 0 && evenPtr < oddPtr) {
+                oddPtr--;
+            }
+            
+            if(evenPtr < oddPtr) {
+                swap(nums, evenPtr, oddPtr);
             }
         }
         
