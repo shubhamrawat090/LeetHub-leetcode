@@ -1,24 +1,36 @@
 // Using 2 pointer method
 class Solution {
     public int[] sortArrayByParity(int[] nums) {
-        int left = 0, right = nums.length-1;
+        int evenPtr = 0, oddPtr = nums.length-1;
         
-        while(left < right) {
-            if(nums[left] % 2 != 0) {
-                if(nums[right] % 2 == 0) {
-                    //swap left and right
-                    nums[left] = nums[left] ^ nums[right];
-                    nums[right] = nums[left] ^ nums[right];
-                    nums[left] = nums[left] ^ nums[right];
-                    
-                    left++;
+        while(evenPtr < oddPtr) {
+            // left side odd
+            if(nums[evenPtr] % 2 != 0) {
+                // right side even
+                if(nums[oddPtr] % 2 == 0) {
+                    swap(nums, evenPtr, oddPtr);
+                    evenPtr++;
+                    oddPtr--;
                 }
-                right--;
-            }else {
-                left++;
+                
+                // right side odd
+                else {
+                    oddPtr--;
+                }
+            }
+            
+            // left side even
+            else {
+                evenPtr++;
             }
         }
         
         return nums;
+    }
+    
+    private void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 }
