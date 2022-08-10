@@ -32,16 +32,12 @@ class Solution {
              tail = tail.next;
         }
         
-        while(list1!=null) {
+        if(list1 != null) {
             tail.next = list1;
-            tail = tail.next;
-            list1 = list1.next;
         }
         
-        while(list2!=null) {
+        if(list2 != null) {
             tail.next = list2;
-            tail = tail.next;
-            list2 = list2.next;
         }
         
         return dummy.next;
