@@ -1,12 +1,13 @@
 class Solution {
     public List<Integer> partitionLabels(String s) {
-        HashMap<Character, Integer> charIdx = new HashMap<>();
+        int[] charIdx = new int[26];
+        Arrays.fill(charIdx, -1);
         
         for(int i=s.length()-1; i>=0; i--) {
             char ch = s.charAt(i);
             
-            if(!charIdx.containsKey(ch)) {
-                charIdx.put(ch, i);
+            if(charIdx[ch-'a'] == -1) {
+                charIdx[ch-'a'] = i;
             }
         }
         
@@ -16,8 +17,8 @@ class Solution {
             
             char c = s.charAt(i);
             
-            if(charIdx.get(c) > maxIdx) {
-                maxIdx = charIdx.get(c);
+            if(charIdx[c - 'a'] > maxIdx) {
+                maxIdx = charIdx[c - 'a'] ;
             }
             
             if(i == maxIdx) {
