@@ -12,7 +12,7 @@ class Solution {
                 int stCol = center[1]-1;
                 int enCol = center[1]+1;
                 
-                int max = Integer.MIN_VALUE;
+                int max = 1;
                 for(int k = stRow; k<=enRow; k++) {
                     for(int l = stCol; l<=enCol; l++) {
                         max = Math.max(max, grid[k][l]);
