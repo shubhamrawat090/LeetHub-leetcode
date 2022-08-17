@@ -1,7 +1,6 @@
 class Solution {
     public void wiggleSort(int[] nums) {
         int size = nums.length;
-        int[] ans = new int[size];
         
         //create freq array
         int max = -1, min = 5001;
@@ -22,7 +21,7 @@ class Solution {
                 idx--;
             }
             
-            ans[odIdx] = idx;
+            nums[odIdx] = idx;
             freq[idx]--;
         } 
         
@@ -37,14 +36,10 @@ class Solution {
                 idx++;
             }
             
-            ans[evIdx] = idx;
+            nums[evIdx] = idx;
             freq[idx]--;
             
             evIdx-=2;
-        }
-        
-        for(int i=0; i<size; i++) {
-            nums[i] = ans[i];
         }
     }
 }
