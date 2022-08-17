@@ -2,6 +2,11 @@ class Solution {
     public void wiggleSort(int[] nums) {
         int size = nums.length;
         
+        //less than 2 size arr cannot be sorted
+        if(size < 2) {
+            return;
+        }
+        
         //create freq array
         int max = -1, min = 5001;
         int[] freq = new int[5001];
@@ -11,35 +16,27 @@ class Solution {
             freq[nums[i]]++;
         }
         
-        //go left to right, skipping 2 steps each iteration
-        //keep adding highest value till its freq goes to 0
-        //when freq goes to 0, add second highest
-        //keep this process going
-        int idx = max;
-        for(int odIdx=1; odIdx<size; odIdx+=2) {
-            while(freq[idx]==0) {
-                idx--;
+        int odIdx = 1;
+        for(int i=max; i>=0; i--) {
+            while(freq[i]>0) {
+                freq[i]--;
+                
+                nums[odIdx] = i;
+                odIdx += 2;
+                
+                if(odIdx >= size) {
+                    //odIdx still at odd place means all max values(peaks) have been made
+                    //it is time to set lower values now
+                    if(odIdx % 2 != 0) {
+                        odIdx = 0;
+                    }
+                    //oddIdx = even means all max(peaks) were filled and odIdx was resetted
+                    //then all lower values are filled now
+                    else {
+                        break;
+                    }
+                }
             }
-            
-            nums[odIdx] = idx;
-            freq[idx]--;
-        } 
-        
-        //go right to left, skipping 2 steps each iteration
-        //keep adding lowest value till its freq goes to 0
-        //when freq goes to 0, add second lowest
-        //keep this process going
-        idx = min;
-        int evIdx = (size%2 == 0) ? size-2: size-1; //start pt diff for odd and even idx
-        while(evIdx>=0) {
-            while(freq[idx]==0) {
-                idx++;
-            }
-            
-            nums[evIdx] = idx;
-            freq[idx]--;
-            
-            evIdx-=2;
         }
     }
 }
