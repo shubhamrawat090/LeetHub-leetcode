@@ -1,13 +1,13 @@
-// CHAINING TECHNIQUE
 class Solution {
     public int maxChunksToSorted(int[] arr) {
-        int max = 0;
         int chunks = 0;
+        int maxReach = 0;
         
         for(int i=0; i<arr.length; i++) {
-            max = Math.max(max, arr[i]);
+            maxReach = Math.max(maxReach, arr[i]);
             
-            if(max == i) {
+            //a chunk formed
+            if(maxReach == i) {
                 chunks++;
             }
         }
