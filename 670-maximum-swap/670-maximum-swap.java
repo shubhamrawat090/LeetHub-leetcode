@@ -5,31 +5,28 @@ class Solution {
             return num;
         }
         
-        LinkedList<Integer> digits = numToDigits(num);
+        char[] digits = Integer.toString(num).toCharArray();
         
         int[] lastIdx = new int[10];
-        for(int i=0; i<digits.size(); i++) {
-            lastIdx[digits.get(i)] = i;
+        for(int i=0; i<digits.length; i++) {
+            lastIdx[digits[i] - '0'] = i;
         }
         
-        boolean swap = false;
-        for(int i=0; i<digits.size(); i++) {
-            int digit = digits.get(i);
+        for(int i=0; i<digits.length; i++) {
+            int digit = digits[i] - '0';
             
             for(int j=9; j>digit; j--) {
                 if(lastIdx[j] > i) {
-                    int temp = digits.get(lastIdx[j]);
-                    digits.set(lastIdx[j], digits.get(i));
-                    digits.set(i, temp);
-                    swap = true;
-                    break;
+                    char temp = digits[i];
+                    digits[i] = digits[lastIdx[j]];
+                    digits[lastIdx[j]] = temp;
+                    
+                    return Integer.valueOf(new String(digits));
                 }
             }
-            
-            if(swap == true) break;
         }
         
-        return digitsToNum(digits);
+        return num;
     }
     
     private LinkedList<Integer> numToDigits(int num) {
