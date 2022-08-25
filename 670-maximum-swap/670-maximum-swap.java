@@ -7,26 +7,26 @@ class Solution {
         
         LinkedList<Integer> digits = numToDigits(num);
         
-        for(int i=0; i<digits.size()-1; i++) {
+        int[] lastIdx = new int[10];
+        for(int i=0; i<digits.size(); i++) {
+            lastIdx[digits.get(i)] = i;
+        }
+        
+        boolean swap = false;
+        for(int i=0; i<digits.size(); i++) {
             int digit = digits.get(i);
-            if(digit != 9) {
-                int max = digit;
-                int maxIdx = i;
-                for(int j=i+1; j<digits.size(); j++) {
-                    if(digits.get(j) >= max) {
-                        maxIdx = j;
-                        max = digits.get(j);
-                    }
-                }
-                
-                if(max == digit) {
-                    continue;
-                } else {
-                    digits.set(i, max);
-                    digits.set(maxIdx, digit);
+            
+            for(int j=9; j>digit; j--) {
+                if(lastIdx[j] > i) {
+                    int temp = digits.get(lastIdx[j]);
+                    digits.set(lastIdx[j], digits.get(i));
+                    digits.set(i, temp);
+                    swap = true;
                     break;
                 }
             }
+            
+            if(swap == true) break;
         }
         
         return digitsToNum(digits);
