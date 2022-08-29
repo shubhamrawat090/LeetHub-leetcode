@@ -54,7 +54,7 @@ class Solution {
             }
         }
         
-        int min = Math.min(count1, Math.min(count2, Math.min(count3, count4)));
+        int min = Math.min(Math.min(count1, count2), Math.min(count3, count4));
         
         return min == Integer.MAX_VALUE? -1: min;
     }
