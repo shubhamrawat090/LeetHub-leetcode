@@ -37,17 +37,17 @@ class Solution {
         if(root == NULL) return vector<int>();
         
         vector<int> ans;
-        inorder(root, &ans);
+        inorder(root, ans);
         
         return ans;
     }
     
-    void inorder(Node* root, vector<int>* ans) {
+    void inorder(Node* root, vector<int>& ans) {
         if(root == NULL) return;
         
         inorder(root->left, ans);
         
-        ans->push_back(root->data);
+        ans.push_back(root->data);
         
         inorder(root->right, ans);
     }
