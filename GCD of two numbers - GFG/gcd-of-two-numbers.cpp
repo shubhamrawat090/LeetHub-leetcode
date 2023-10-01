@@ -13,23 +13,15 @@ class Solution
 	    if(A == 0) return B;
 	    if(B == 0) return A;
 	    
-	    if(A < B) {
-            int temp = A;
-            A = B;
-            B = temp;
-        }
-	    
-	    while(A > 0) {
-	        A = A-B;
-	        
-	        if(A > 0 && A < B) {
-	            int temp = A;
-	            A = B;
-	            B = temp;
+	    while(A > 0 && B > 0) {
+	        if(A > B) {
+	            A = A - B;
+	        } else {
+	            B = B - A;
 	        }
 	    }
 	    
-	    return B;
+	    return A == 0 ? B : A;
 	} 
 };
 
