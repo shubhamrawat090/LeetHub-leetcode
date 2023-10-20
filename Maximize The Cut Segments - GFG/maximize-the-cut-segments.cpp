@@ -32,23 +32,9 @@ class Solution
             return dp[n];
         }
         
-        int xCut = INT_MIN;
-        int remainX = helper(n-x, x, y, z, dp);
-        if(remainX >= 0) {
-            xCut = 1 + remainX;
-        } 
-        
-        int yCut = INT_MIN;
-        int remainY = helper(n-y, x, y, z, dp);
-        if(remainY >= 0) {
-            yCut = 1 + remainY;
-        } 
-        
-        int zCut = INT_MIN;
-        int remainZ = helper(n-z, x, y, z, dp);
-        if(remainZ >= 0) {
-            zCut = 1 + remainZ;
-        } 
+        int xCut = 1 + helper(n-x, x, y, z, dp); 
+        int yCut = 1 + helper(n-y, x, y, z, dp);
+        int zCut = 1 + helper(n-z, x, y, z, dp);
         
         return dp[n] = max(xCut, max(yCut, zCut));
     }
